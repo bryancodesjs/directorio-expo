@@ -1,0 +1,43 @@
+.opcion--registro--botones--wrap button {
+    margin: 5px 10px;
+    background-color: #7d90a25e ;
+    color: #677f9a ;
+    &.pressed {
+        background-color: #0460b3 !important;
+        color: #fff !important;
+    }
+}
+.navbar-brand {
+    padding: 0 !important;
+    margin: 0 !important;
+}
+@media (min-width: 100px) and (max-width: 600px) {
+    .opcion--registro--botones--wrap {
+        flex-direction: column !important;
+    }
+    a img {
+        width: 250px !important;
+    }
+    .container-fluid {
+        padding-top:100px;
+        padding-bottom: 150px;
+    }
+}
+@media (min-width:601px) and (max-width:3000px) {
+    .container-fluid {
+        padding-top: 150px;
+        padding-bottom: 150px;
+    }
+}
+.caption {
+    .caption--img {
+        width: 300px;
+        max-height: 150px;
+    }
+    .caption--txt {
+        max-width: 300px;
+    }    
+}
+.registro--paso {
+    max-width: 650px;
+}

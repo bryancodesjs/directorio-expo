@@ -1,0 +1,33 @@
+<table id="artistas">
+    <thead>
+      <tr>
+        <th scope="col">ID</th>
+        <th scope="col">Nombre</th>
+        <th scope="col">Email</th>
+        <th scope="col">Profesion</th>
+        <th scope="col">Ingreso</th>
+        <th scope="col">Publicaciones</th>
+        <th scope="col">Vistas</th>
+        <th scope="col">Valoraciones</th>
+        <th scope="col">Acciones</th>
+      </tr>
+    </thead>
+    <tbody *ngFor="let item of artistas; index as i">
+      <tr>
+        <th scope="row">{{i + 1}}</th>
+        <td>{{item.artista}}</td>
+        <td>{{item.email}}</td>
+        <td>{{item.profesion}}</td>
+        <td>{{item.ingreso | date}}</td>
+        <td>{{item.publicaciones}}</td>
+        <td>{{item.visitas}}</td>
+        <td>{{item.valoraciones}}</td>
+        <td>
+            <div class="d-flex w-100">
+                <h5 (click)="Deshabilitar(item.id)" *ngIf="!item.bloqueado" class="mr pointer" title="Bloquear Usuario"><i class="bi bi-slash-circle-fill"></i></h5>
+                <h5 (click)="Habilitar(item.id)" *ngIf="item.bloqueado" class="mr pointer" title="Desbloquear Usuario"><i class="bi bi-play-fill"></i></h5>                
+            </div>
+        </td>
+      </tr>     
+    </tbody>
+</table>

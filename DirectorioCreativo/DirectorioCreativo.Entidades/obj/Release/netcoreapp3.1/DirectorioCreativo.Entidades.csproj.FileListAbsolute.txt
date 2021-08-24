@@ -1,0 +1,28 @@
+C:\Users\martin.perez\Desktop\Ministerio de Cultura Oficial\DirectorioCreativo_Cultural\DirectorioCreativo\DirectorioCreativo.Entidades\bin\Release\netcoreapp3.1\DirectorioCreativo.Entidades.deps.json
+C:\Users\martin.perez\Desktop\Ministerio de Cultura Oficial\DirectorioCreativo_Cultural\DirectorioCreativo\DirectorioCreativo.Entidades\bin\Release\netcoreapp3.1\DirectorioCreativo.Entidades.dll
+C:\Users\martin.perez\Desktop\Ministerio de Cultura Oficial\DirectorioCreativo_Cultural\DirectorioCreativo\DirectorioCreativo.Entidades\bin\Release\netcoreapp3.1\DirectorioCreativo.Entidades.pdb
+C:\Users\martin.perez\Desktop\Ministerio de Cultura Oficial\DirectorioCreativo_Cultural\DirectorioCreativo\DirectorioCreativo.Entidades\obj\Release\netcoreapp3.1\DirectorioCreativo.Entidades.csprojAssemblyReference.cache
+C:\Users\martin.perez\Desktop\Ministerio de Cultura Oficial\DirectorioCreativo_Cultural\DirectorioCreativo\DirectorioCreativo.Entidades\obj\Release\netcoreapp3.1\DirectorioCreativo.Entidades.AssemblyInfoInputs.cache
+C:\Users\martin.perez\Desktop\Ministerio de Cultura Oficial\DirectorioCreativo_Cultural\DirectorioCreativo\DirectorioCreativo.Entidades\obj\Release\netcoreapp3.1\DirectorioCreativo.Entidades.AssemblyInfo.cs
+C:\Users\martin.perez\Desktop\Ministerio de Cultura Oficial\DirectorioCreativo_Cultural\DirectorioCreativo\DirectorioCreativo.Entidades\obj\Release\netcoreapp3.1\DirectorioCreativo.Entidades.csproj.CoreCompileInputs.cache
+C:\Users\martin.perez\Desktop\Ministerio de Cultura Oficial\DirectorioCreativo_Cultural\DirectorioCreativo\DirectorioCreativo.Entidades\obj\Release\netcoreapp3.1\DirectorioCreativo.Entidades.dll
+C:\Users\martin.perez\Desktop\Ministerio de Cultura Oficial\DirectorioCreativo_Cultural\DirectorioCreativo\DirectorioCreativo.Entidades\obj\Release\netcoreapp3.1\DirectorioCreativo.Entidades.pdb
+C:\Users\martin.perez\Desktop\Ministerio de Cultura Oficial\Subir a github\DirectorioCreativo\DirectorioCreativo.Entidades\bin\Release\netcoreapp3.1\DirectorioCreativo.Entidades.deps.json
+C:\Users\martin.perez\Desktop\Ministerio de Cultura Oficial\Subir a github\DirectorioCreativo\DirectorioCreativo.Entidades\bin\Release\netcoreapp3.1\DirectorioCreativo.Entidades.dll
+C:\Users\martin.perez\Desktop\Ministerio de Cultura Oficial\Subir a github\DirectorioCreativo\DirectorioCreativo.Entidades\bin\Release\netcoreapp3.1\DirectorioCreativo.Entidades.pdb
+C:\Users\martin.perez\Desktop\Ministerio de Cultura Oficial\Subir a github\DirectorioCreativo\DirectorioCreativo.Entidades\obj\Release\netcoreapp3.1\DirectorioCreativo.Entidades.csprojAssemblyReference.cache
+C:\Users\martin.perez\Desktop\Ministerio de Cultura Oficial\Subir a github\DirectorioCreativo\DirectorioCreativo.Entidades\obj\Release\netcoreapp3.1\DirectorioCreativo.Entidades.AssemblyInfoInputs.cache
+C:\Users\martin.perez\Desktop\Ministerio de Cultura Oficial\Subir a github\DirectorioCreativo\DirectorioCreativo.Entidades\obj\Release\netcoreapp3.1\DirectorioCreativo.Entidades.AssemblyInfo.cs
+C:\Users\martin.perez\Desktop\Ministerio de Cultura Oficial\Subir a github\DirectorioCreativo\DirectorioCreativo.Entidades\obj\Release\netcoreapp3.1\DirectorioCreativo.Entidades.csproj.CoreCompileInputs.cache
+C:\Users\martin.perez\Desktop\Ministerio de Cultura Oficial\Subir a github\DirectorioCreativo\DirectorioCreativo.Entidades\obj\Release\netcoreapp3.1\DirectorioCreativo.Entidades.dll
+C:\Users\martin.perez\Desktop\Ministerio de Cultura Oficial\Subir a github\DirectorioCreativo\DirectorioCreativo.Entidades\obj\Release\netcoreapp3.1\DirectorioCreativo.Entidades.pdb
+C:\Users\martin.perez\Desktop\Directiorio_Creativo\DirectorioCreativo_Cultural\DirectorioCreativo\DirectorioCreativo.Entidades\bin\Release\netcoreapp3.1\DirectorioCreativo.Entidades.deps.json
+C:\Users\martin.perez\Desktop\Directiorio_Creativo\DirectorioCreativo_Cultural\DirectorioCreativo\DirectorioCreativo.Entidades\bin\Release\netcoreapp3.1\DirectorioCreativo.Entidades.dll
+C:\Users\martin.perez\Desktop\Directiorio_Creativo\DirectorioCreativo_Cultural\DirectorioCreativo\DirectorioCreativo.Entidades\bin\Release\netcoreapp3.1\DirectorioCreativo.Entidades.pdb
+C:\Users\martin.perez\Desktop\Directiorio_Creativo\DirectorioCreativo_Cultural\DirectorioCreativo\DirectorioCreativo.Entidades\obj\Release\netcoreapp3.1\DirectorioCreativo.Entidades.csproj.AssemblyReference.cache
+C:\Users\martin.perez\Desktop\Directiorio_Creativo\DirectorioCreativo_Cultural\DirectorioCreativo\DirectorioCreativo.Entidades\obj\Release\netcoreapp3.1\DirectorioCreativo.Entidades.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\martin.perez\Desktop\Directiorio_Creativo\DirectorioCreativo_Cultural\DirectorioCreativo\DirectorioCreativo.Entidades\obj\Release\netcoreapp3.1\DirectorioCreativo.Entidades.AssemblyInfoInputs.cache
+C:\Users\martin.perez\Desktop\Directiorio_Creativo\DirectorioCreativo_Cultural\DirectorioCreativo\DirectorioCreativo.Entidades\obj\Release\netcoreapp3.1\DirectorioCreativo.Entidades.AssemblyInfo.cs
+C:\Users\martin.perez\Desktop\Directiorio_Creativo\DirectorioCreativo_Cultural\DirectorioCreativo\DirectorioCreativo.Entidades\obj\Release\netcoreapp3.1\DirectorioCreativo.Entidades.csproj.CoreCompileInputs.cache
+C:\Users\martin.perez\Desktop\Directiorio_Creativo\DirectorioCreativo_Cultural\DirectorioCreativo\DirectorioCreativo.Entidades\obj\Release\netcoreapp3.1\DirectorioCreativo.Entidades.dll
+C:\Users\martin.perez\Desktop\Directiorio_Creativo\DirectorioCreativo_Cultural\DirectorioCreativo\DirectorioCreativo.Entidades\obj\Release\netcoreapp3.1\DirectorioCreativo.Entidades.pdb

@@ -1,0 +1,348 @@
+<div class="go--back position-absolute p-2">
+    <a class="nav-link accent-absolute" href="" routerLink="/"><i class="bi bi-chevron-left"></i> Volver</a>
+</div>
+<div class="container-fluid d-flex justify-content-center align-items-center d-flex flex-column ">
+    <div class="content d-flex justify-content-center flex-column align-items-center">
+        <a href="" routerLink="" class=" mb-3">
+            <img src="../../../assets/logo.png" alt="">
+        </a>
+        <h5 class="mt-3 mb-3 dark-accent">Zona de Registro</h5>
+        <!-- <form class="form-width mt-3" [formGroup]="registroForm" (ngSubmit)="submit()">
+        <div class="form-group mt-1">
+            <label>Nombre</label>
+            <input type="text" class="form-control" placeholder="Nombre" formControlName="nombre" >
+            <div *ngIf="submitted && f.nombre.errors">
+                <p class="form-text text-danger" *ngIf="f.nombre.errors.required" >Nombre es requerido.</p>
+            </div>
+        </div>
+        <div class="form-group mt-1">
+            <label>Apellido</label>
+            <input type="text" class="form-control" placeholder="Apellido" formControlName="apellido" >
+            <div *ngIf="submitted && f.apellido.errors">
+                <p class="form-text text-danger" *ngIf="f.apellido.errors.required" >Apellido es requerido.</p>
+            </div>
+        </div>
+        <hr>
+        <div class="form-group">
+          <label>Email</label>
+          <input type="email" class="form-control" placeholder="Inserte su Email" formControlName="email" required>
+          <div *ngIf="submitted && f.email.errors">
+            <p class="form-text text-danger" *ngIf="f.email.errors.required" >Email es requerido.</p>
+        </div>
+          
+        </div>
+        <div class="form-group">
+            <label>Telefono</label>
+            <input type="tel" class="form-control" placeholder="(---)--- ----" formControlName="telefono" >
+            <div *ngIf="submitted && f.telefono.errors">
+                <p class="form-text text-danger" *ngIf="f.telefono.errors.required" >Telefono es requerido..</p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="address1">Provincia</label>
+            <select class="form-control" formControlName="_idprovincia">
+                <option value="" disabled>Seleccione</option>
+                <option value="1">Santo Domingo</option>
+                <option value="2">Santiago</option>
+                <option value="3">Monte y culebra</option>
+            </select>
+            <div *ngIf="submitted && f._idprovincia.errors">
+                <p class="form-text text-danger" *ngIf="f._idprovincia.errors.required" >Provincia es requerida.</p>
+            </div>
+        </div>      
+        <hr>
+        <div class="form-group">
+          <label>Contraseña</label>
+          <input type="password" class="form-control" placeholder="contraseña" formControlName="clave" minlength="5">
+          <div *ngIf="submitted && f.clave.errors">
+            <p class="form-text text-danger" *ngIf="f.clave.errors.required" >Contraseña es requerida.</p>
+          </div>
+          <div *ngIf="claveError">
+            <p class="form-text text-danger">Clave no coinciden.</p>
+          </div>
+        </div>
+        <div class="form-group">
+            <label>Confirmar Contraseña</label>
+            <input type="password" class="form-control" placeholder="contraseña" formControlName="confirmar_clave" minlength="5">
+            <div *ngIf="submitted && f.confirmar_clave.errors">
+                <p class="form-text text-danger" *ngIf="f.confirmar_clave.errors.required" >Contraseña es requerida.</p>
+            </div>
+            <div *ngIf="claveError">
+                <p class="form-text text-danger">Clave no coinciden.</p>
+              </div>
+          </div>
+
+          <div class="text-center mt-3" *ngIf="error">      
+            <p class="alert alert-danger">{{ messageError }}</p>
+          </div>
+
+        <button type="submit" class="btn btn-primary w-100 mt-1">Enviar Solicitud de Registro <i class="bi bi-file-earmark-check"></i>
+        </button>        
+    </form> -->
+
+        <div *ngIf="menu" class="registro--paso registro--paso--uno d-flex justify-content-center align-items-center flex-column">
+            <h4 class="text-center mb-5">¿Cómo deseas registrarte?</h4>
+            <div class="d-flex justify-content-center mb-5 opcion--registro--botones--wrap w-100">
+                <button (click)="registro('Usuario')" [class]=" usuario ? 'btn pressed' : 'btn' "><i class="bi bi-person-fill mr"></i> Usuario</button>
+                <button (click)="registro('Profesional')" [class]=" profesional ? 'btn pressed' : 'btn' "><i class="bi bi-person-lines-fill mr"></i>Profesional</button>
+                <!-- cuando se presiona un boton, se le agrega la clase 'pressed'-->
+                <button (click)="registro('Empresa')" [class]=" empresa ? 'btn pressed' : 'btn' "><i class="bi bi-building mr"></i>Empresa</button>
+            </div>
+
+            <div *ngIf="usuario && !continuar" class="caption caption--usuario d-flex justify-content-center align-items-center flex-wrap">
+                <img class="caption--img" src="../../../assets/registro/visitante.svg" alt="">
+                <div class="caption--txt mt-4">
+                    <h3>Usuario</h3>
+                    <h5 class="text-muted">Visitante</h5>
+                    <p>Como usuario, puedes explorar el directorio, valorar obras y contratar profesionales</p>
+                    <button (click)="avanzar(true)" class="btn accent">Registrarme como Usuario <i class="bi bi-chevron-right"></i></button>
+                </div>
+            </div>
+
+            <div *ngIf="profesional && !continuar" class="caption caption--visitante d-flex justify-content-center align-items-center flex-wrap">
+                <img class="caption--img" src="../../../assets/registro/profesional.svg" alt="">
+                <div class="caption--txt mt-4">
+                    <h3>Profesional</h3>
+                    <h5 class="text-muted">Persona Fisica</h5>
+                    <p>Como profesional, puedes publicar tu trabajo y conectar con potenciales clientes de todo el pais</p>
+                    <button (click)="avanzar(true)" class="btn accent">Registrarme como Profesional <i class="bi bi-chevron-right"></i></button>
+                </div>
+            </div>
+
+            <div *ngIf="empresa && !continuar" class="caption caption--visitante d-flex justify-content-center align-items-center flex-wrap">
+                <img class="caption--img" src="../../../assets/registro/empresa.svg" alt="">
+                <div class="caption--txt mt-4">
+                    <h3>Empresa</h3>
+                    <h5 class="text-muted">Persona Juridica</h5>
+                    <p>Como empresa, puedes publicar tus servicios y conectar con potenciales clientes de todo el pais</p>
+                    <button (click)="avanzar(true)" class="btn accent">Registrarme como Empresa <i class="bi bi-chevron-right"></i></button>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- FORMULARIO PARA USUARIO -->
+        <div *ngIf="continuar && usuario" class="registro--paso registro--paso--usuario d-flex justify-content-center align-items-center flex-column">
+            <h4 class="text-center mb-5"><i class="bi bi-person-fill mr"></i>Nuevo Usuario</h4>
+            <form class="w-100" [formGroup]="registroForm" (ngSubmit)="submit()">
+                <h3>Datos de acceso</h3>
+                <div class="form-group">
+                  <label for="">Nombre</label>
+                  <input type="text" class="form-control" formControlName="nombre">
+                  <div *ngIf="submitted && f.nombre.errors">
+                    <p class="form-text text-danger" *ngIf="f.nombre.errors.required" >Nombre es requerido.</p>
+                  </div>
+                </div>
+                <div class="form-group">
+                    <label for="">Apellidos</label>
+                    <input type="text" class="form-control" formControlName="apellido">
+                    <div *ngIf="submitted && f.apellido.errors">
+                      <p class="form-text text-danger" *ngIf="f.apellido.errors.required" >Apellido es requerido.</p>
+                    </div>
+                  </div>
+                <div class="form-group">
+                    <label for="">Correo Electronico</label>
+                    <input type="email" class="form-control" formControlName="email">
+                    <div *ngIf="submitted && f.email.errors">
+                      <p class="form-text text-danger" *ngIf="f.email.errors.required" >Email es requerido.</p>
+                    </div>
+                    <div *ngIf="error && messageError != null">
+                      <p class="form-text text-danger" >{{ messageError }}</p>
+                    </div>
+                </div>
+                <div class="form-group">
+                  <label for="">Contraseña</label>
+                  <input type="password" class="form-control" formControlName="clave">
+                  <div *ngIf="submitted && f.clave.errors">
+                    <p class="form-text text-danger" *ngIf="f.clave.errors.required" >Clave es requerida.</p>
+                  </div>
+                  <div *ngIf="claveError && submitted">
+                    <p class="form-text text-danger">Claves no coinciden.</p>
+                  </div>
+                </div>
+                <div class="form-group">
+                    <label for="">Confirmar Contraseña</label>
+                    <input type="password" class="form-control" formControlName="confirmar_clave">
+                    <div *ngIf="submitted && f.confirmar_clave.errors">
+                      <p class="form-text text-danger" *ngIf="f.confirmar_clave.errors.required" >Confirmar Clave es requerido.</p>
+                    </div>
+                    <div *ngIf="claveError && submitted">
+                      <p class="form-text text-danger">Claves no coinciden.</p>
+                    </div>
+                  </div>
+                <div class="form-check">
+                  <input type="checkbox" class="form-check-input" formControlName="leido">
+                  <label class="form-check-label" for="">
+                    He leido y aceptado los 
+                    <a href="">Terminos y Condiciones</a>
+                  </label>
+                  <div *ngIf="submitted && f.leido.errors">
+                    <p class="form-text text-danger" *ngIf="f.leido.errors.required" >Debe aceptar los terminos.</p>
+                  </div>
+                </div>
+                <div class="form-check">
+                    <input type="checkbox" class="form-check-input" >
+                    <label class="form-check-label" for="">
+                      Deseo recibir novedades y ofertas en mi correo
+                    </label>
+                  </div>
+                  <button *ngIf="!submitted" (click)="avanzar(false)" type="button" class="btn btn-danger w-25">Cancelar</button>
+                  <button *ngIf="!submitted" type="submit" class="btn accent w-75">Siguiente</button>
+                  <!-- CARGANDO -->
+                  <div *ngIf="cargando" class="spinner-border text-secondary" role="status">
+                    <span class="sr-only"></span>
+                  </div>
+              </form>
+        </div>
+
+        <!-- FORMULARIO PARA PROFESIONAL -->
+        <div *ngIf="continuar && profesional" class="registro--paso registro--paso--usuario d-flex justify-content-center align-items-center flex-column">
+            <h4 class="text-center mb-5"><i class="bi bi-person-lines-fill mr"></i>Nuevo Profesional</h4>
+            <form class="w-100" [formGroup]="registroForm" (ngSubmit)="submit()">
+              <h3>Datos de acceso</h3>
+              <div class="form-group">
+                <label for="">Nombre</label>
+                <input type="text" class="form-control" formControlName="nombre">
+                <div *ngIf="submitted && f.nombre.errors">
+                  <p class="form-text text-danger" *ngIf="f.nombre.errors.required" >Nombre es requerido.</p>
+                </div>
+              </div>
+              <div class="form-group">
+                  <label for="">Apellidos</label>
+                  <input type="text" class="form-control" formControlName="apellido">
+                  <div *ngIf="submitted && f.apellido.errors">
+                    <p class="form-text text-danger" *ngIf="f.apellido.errors.required" >Apellido es requerido.</p>
+                  </div>
+                </div>
+              <div class="form-group">
+                  <label for="">Correo Electronico</label>
+                  <input type="email" class="form-control" formControlName="email">
+                  <div *ngIf="submitted && f.email.errors">
+                    <p class="form-text text-danger" *ngIf="f.email.errors.required" >Email es requerido.</p>
+                  </div>
+                  <div *ngIf="error && messageError != null">
+                    <p class="form-text text-danger" >{{ messageError }}</p>
+                  </div>
+              </div>
+              <div class="form-group">
+                <label for="">Contraseña</label>
+                <input type="password" class="form-control" formControlName="clave">
+                <div *ngIf="submitted && f.clave.errors">
+                  <p class="form-text text-danger" *ngIf="f.clave.errors.required" >Clave es requerida.</p>
+                </div>
+                <div *ngIf="claveError && submitted">
+                  <p class="form-text text-danger">Claves no coinciden.</p>
+                </div>
+              </div>
+              <div class="form-group">
+                  <label for="">Confirmar Contraseña</label>
+                  <input type="password" class="form-control" formControlName="confirmar_clave">
+                  <div *ngIf="submitted && f.confirmar_clave.errors">
+                    <p class="form-text text-danger" *ngIf="f.confirmar_clave.errors.required" >Confirmar Clave es requerido.</p>
+                  </div>
+                  <div *ngIf="claveError && submitted">
+                    <p class="form-text text-danger">Claves no coinciden.</p>
+                  </div>
+                </div>
+              <div class="form-check">
+                <input type="checkbox" class="form-check-input" formControlName="leido">
+                <label class="form-check-label" for="">
+                  He leido y aceptado los 
+                  <a href="">Terminos y Condiciones</a>
+                </label>
+              </div>
+              <div class="form-check">
+                  <input type="checkbox" class="form-check-input" >
+                  <label class="form-check-label" for="">
+                    Deseo recibir novedades y ofertas en mi correo
+                  </label>
+                </div>
+                <button *ngIf="!submitted" (click)="avanzar(false)" type="button" class="btn btn-danger w-25">Cancelar</button>
+                <button *ngIf="!submitted" type="submit" class="btn accent w-75">Siguiente</button>
+                <!-- CARGANDO -->
+                <div *ngIf="cargando" class="spinner-border text-secondary" role="status">
+                  <span class="sr-only"></span>
+                </div>
+            </form>
+        </div>
+
+        <!-- FORMULARIO PARA EMPRESA -->
+        <div *ngIf="continuar && empresa" class="registro--paso registro--paso--usuario d-flex justify-content-center align-items-center flex-column">
+            <h4 class="text-center mb-5"><i class="bi bi-building mr"></i>Nueva Empresa</h4>
+            <form class="w-100" [formGroup]="registroFormEmpresa" (ngSubmit)="submitEmpresa()">
+                <h3>Datos de acceso</h3>
+                <div class="form-group">
+                  <label for="">Nombre</label>
+                  <input type="text" class="form-control" formControlName="nombre">
+                  <div *ngIf="submitted && e.nombre.errors">
+                    <p class="form-text text-danger" *ngIf="e.nombre.errors.required" >Nombre es requerido.</p>
+                  </div>
+                </div>
+                <div class="form-group">
+                    <label for="">RNC</label>
+                    <input type="text" class="form-control" formControlName="rnc">
+                    <div *ngIf="submitted && e.rnc.errors">
+                      <p class="form-text text-danger" *ngIf="e.rnc.errors.required" >RNC es requerido.</p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="">Telefono</label>
+                    <input id="phone" type="tel" class="form-control" formControlName="telefono">
+                    <div *ngIf="submitted && e.telefono.errors">
+                      <p class="form-text text-danger" *ngIf="e.telefono.errors.required" >Telefono es requerido.</p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="">Correo Electronico</label>
+                    <input type="email" class="form-control" formControlName="email">
+                    <div *ngIf="submitted && e.email.errors">
+                      <p class="form-text text-danger" *ngIf="e.email.errors.required" >Correo Electronico es requerido.</p>
+                    </div>
+                    <div *ngIf="error && messageError != null">
+                      <p class="form-text text-danger" >{{ messageError }}</p>
+                    </div>
+                </div>
+                <div class="form-group">
+                  <label for="">Contraseña</label>
+                  <input type="password" class="form-control" formControlName="clave">
+                  <div *ngIf="submitted && e.clave.errors">
+                    <p class="form-text text-danger" *ngIf="e.clave.errors.required" >Contraseña es requerida.</p>
+                  </div>
+                  <div *ngIf="claveError && submitted">
+                    <p class="form-text text-danger">Claves no coinciden.</p>
+                  </div>
+                </div>
+                <div class="form-group">
+                    <label for="">Confirmar Contraseña</label>
+                    <input type="password" class="form-control" formControlName="confirmar_clave">
+                    <div *ngIf="submitted && e.clave.errors">
+                      <p class="form-text text-danger" *ngIf="e.clave.errors.required" >Confirmar Contraseña es requerido.</p>
+                    </div>
+                    <div *ngIf="claveError && submitted">
+                      <p class="form-text text-danger">Claves no coinciden.</p>
+                    </div>
+                  </div>
+                <div class="form-check">
+                  <input type="checkbox" class="form-check-input" >
+                  <label class="form-check-label" for="">
+                    He leido y aceptado los 
+                    <a href="">Terminos y Condiciones</a>
+                  </label>
+                </div>
+                <div class="form-check">
+                    <input type="checkbox" class="form-check-input" >
+                    <label class="form-check-label" for="">
+                      Deseo recibir novedades y ofertas en mi correo
+                    </label>
+                  </div>
+                <button *ngIf="!submitted" (click)="avanzar(false)" type="button" class="btn btn-danger w-25">Cancelar</button>
+                <button *ngIf="!submitted" type="submit" class="btn accent w-75">Siguiente</button>
+                <!-- CARGANDO -->
+                <div *ngIf="cargando" class="spinner-border text-secondary" role="status">
+                  <span class="sr-only"></span>
+                </div>
+              </form>
+        </div>
+        <p class="mt-3">¿Ya tienes una cuenta? <a routerLink="/login">Accede a tu perfil</a></p>
+    </div>
+</div>

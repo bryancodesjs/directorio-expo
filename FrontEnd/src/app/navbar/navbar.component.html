@@ -1,0 +1,138 @@
+<nav class="navbar fixed-top navbar-expand-lg navbar-light background-z-3 d-flex flex-column" >
+  <div class="container-fluid shadow">
+    <div class="container d-flex justify-content-between">
+
+    
+    <div class="navbar-brand d-flex align-items-center flex-column" routerLink="/">
+      <div class="overmark"></div>
+      <!-- <h4 class="no-margin">Directorio</h4>
+      <h4>Creativo</h4> -->
+      <img class="nav-logo" src="../../assets/logo.png" alt="">
+    </div> 
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item"><a class="nav-link" href="" routerLink="/">Contrata</a></li>
+        <li class="nav-item"><a class="nav-link" href="" routerLink="/">Aprende</a></li>
+        <li class="nav-item"><a class="nav-link" href="" routerLink="/">Nosotros</a></li>
+      </ul>
+      <a href="" class=" nav-link"><i class="bi bi-search"></i></a>
+      <a *ngIf="logueado" routerLink="/mensajeria" class=" nav-link"><i class="bi bi-envelope-fill"></i></a>
+      <div class="d-flex user-btn-wrap" *ngIf="logueado == null && !errorConexion">
+        <p class="btn-1 btn btn-light border-rounded text-success">Cargando....</p>
+      </div>
+      <div class="d-flex user-btn-wrap" *ngIf="logueado == null && errorConexion">
+        <p class="btn-1 btn btn-light border-rounded text-danger"><i class="bi bi-hdd"></i> Error de conexion</p>
+      </div>
+      <div class="d-flex user-btn-wrap" *ngIf="logueado == false">
+        <a routerLink="/login" class="btn-1 btn btn-light">Iniciar Sesion</a>
+        <a routerLink="/registro" class="btn accent">Registrarse</a>
+      </div>
+      <!--
+      <div class="d-flex user-btn-wrap" *ngIf="!admin && logueado == true">
+        <a routerLink="/dashboard" class="btn light-accent">Bryan C. <i class="bi bi-person-circle"></i></a>     
+      </div> -->
+
+      <!--dropdown autogestion-->
+      <div class="dropdown" *ngIf="!admin && logueado == true">
+        <button class="btn light-accent dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+         {{ nombreUsuario }} <i class="bi bi-person-circle"></i>
+        </button>
+        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+          <li *ngIf="permisoArtista_Empresa" ><a class="dropdown-item" routerLink="/dashboard">Mi Perfil</a></li>
+          <li *ngIf="permisoArtista_Empresa"><a class="dropdown-item" routerLink="/configuracion">Configuracion</a></li>
+          <li><a class="dropdown-item" routerLink="/" (click)="LogOut()">Cerrar Sesion</a></li>
+        </ul>
+      </div>
+
+      <div class="d-flex user-btn-wrap" *ngIf="admin && logueado == true">
+        <a routerLink="/backoffice" class="btn light-accent"><i class="bi bi-person-circle"></i> Panel</a>
+      </div>
+      <div class="d-flex user-btn-wrap ml10" *ngIf="logueado == true && permisoArtista_Empresa">          
+        <!-- <button type="button" id="salir-btn" (click)="LogOut()" class="btn-1 btn btn-danger border-rounded" ><span class="mr10">Salir</span> <i class="bi bi-box-arrow-right"></i></button> -->
+        <a class="btn accent" (click)="show()">Subir proyecto <i class="bi bi-arrow-up-short"></i></a>
+      </div>
+      
+    </div>
+  </div>
+  </div>
+  
+  <!--area de busqueda-->
+  <!-- *ngIf="mostrarBusqueda()" -->
+  <div *ngIf="mostrarBusqueda()" class="container">
+    <app-busqueda></app-busqueda>
+  </div> 
+
+</nav>
+
+<!-- MODAL -->
+<div [style.display]="showModal ? 'block' : 'none'" class="modal" id="imagemodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog post-modal">
+    <div class="modal-content p-2">
+      <div class="modal-header">
+        <h4 class="modal-title" id="myModalLabel">Nueva Publicacion</h4>
+      </div>
+      <div class="modal-body">         
+
+          <form id="postForm" [formGroup]="publicacionForm" (ngSubmit)="submitPublicacion()">
+              <div class="form-group mt-3 d-flex justify-content-center align-items-center flex-column">
+                  <label class="mb-4">Buscar en mi dispositivo</label>
+                  <!-- boton de subir archivos-->
+                  <div class="file-upload">
+                      <input (click)="ComprimirPerfil()" class="form-control-file" accept="image/*">
+                      <i class="bi bi-arrow-up-short"></i>
+                  </div>
+
+                  <!-- mini vista previa de archivo en memoria -->
+                  <div class="form-group mt-5" *ngIf="imgBase64">
+                      <div class="mini-vista-img-wrap rounded d-flex justify-content-center align-items-center">
+                          <img [src]="imgBase64"  />
+                      </div>
+                  </div>
+                  <div *ngIf="submitted && f.imgObra.errors">
+                      <p class="form-text text-danger" *ngIf="f.imgObra.errors.required" >Una imagen es requerida.</p>
+                  </div>  
+              </div>
+
+              <div class="form-group mt-4">
+                <label for="exampleInputEmail1">Titulo</label>
+                <input type="email" class="form-control" placeholder="Nombre de la obra" formControlName="nombreObra">     
+                <div *ngIf="submitted && f.nombreObra.errors">
+                  <p class="form-text text-danger" *ngIf="f.nombreObra.errors.required" >Un titulo es requerido.</p>
+                </div>             
+              </div>
+              <div class="form-group mt-1">
+                <label for="exampleInputPassword1">Descripción</label>
+                <textarea class="form-control" row="3" placeholder="Descripcion" formControlName="descripcionObra"></textarea> 
+                <div *ngIf="submitted && f.descripcionObra.errors">
+                  <p class="form-text text-danger" *ngIf="f.descripcionObra.errors.required" >Una descripcion es requerida.</p>
+                </div>  
+              </div>
+
+              <div class="form-group mt-1">
+                  <label>Ubicacion <i class="bi bi-pin-map-fill"></i></label>
+                  <select class="form-control" formControlName="ubicacion" >
+                    <option value="" selected disabled>Click para seleccionar</option>
+                    <option value="1">Santo Domingo</option>
+                    <option value="2">Santiago</option>
+                    <option value="3">La Romana</option>                      
+                  </select>
+                  <div *ngIf="submitted && f.ubicacion.errors">
+                      <p class="form-text text-danger" *ngIf="f.ubicacion.errors.required" >Una ubicacion es requerida.</p>
+                  </div>  
+              </div>
+            
+              <div class="form-group mt-3 d-flex justify-content-between">
+                  <button type="button" class="btn btn-default" data-dismiss="modal" (click)="hide()">Cancelar</button>
+                  <button type="submit" class="btn btn-primary" data-dismiss="modal" >Publicar</button>
+              </div>
+                
+          </form>
+
+      </div>
+     
+    </div>
+  </div>
+</div>

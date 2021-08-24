@@ -1,0 +1,148 @@
+ <!-- BUCLE FOR PARA IMPRIMIR TODAS LAS SOLICITUDES DE CAMBIO -->
+<section class="container" *ngFor="let items of ticketPendientes">
+    <div class="results-wrap">
+        <div class="result bg border round p-3 mb-3 d-flex">           
+            <div class="about-wrap d-flex flex-column justify-content-between w-100">             
+
+              <div class="about-author d-flex flex-column">
+                <!--<div class="author-img-wrap rounded-circle overflow-hidden d-flex justify-content-center align-items-center">
+                    <img [src]=" items?.img_perfil != null ? '/assets/img/' + items?.img_perfil : '../../assets/default-perfil.png' ">                        
+                </div>-->
+                    
+                <h5>{{ items.artista }}</h5>
+                
+                <!-- <h5 *ngIf="items.solicitud_cambios?.nombre">Nuevo nombre: {{ items.solicitud_cambios?.nombre }} fecha {{ items.solicitud_cambios?.fecha_solicitud | date :'short'}}</h5> -->
+                <!-- <h5 *ngIf="items.solicitud_cambios?.apellido">Nuevo apellido: {{ items.solicitud_cambios?.apellido }} fecha {{ items.solicitud_cambios?.fecha_solicitud | date :'short'}}</h5> -->
+                <!-- <h5 *ngIf="items.solicitud_cambios?.descripcion">Nueva descripcion: {{ items.solicitud_cambios?.descripcion }} fecha {{ items.solicitud_cambios?.fecha_solicitud | date :'short'}}</h5> -->
+                <!-- <h5 *ngIf="items.solicitud_cambios?.email">Nuevo email: {{ items.solicitud_cambios?.email }} fecha {{ items.solicitud_cambios?.fecha_solicitud | date :'short'}}</h5> -->
+                <!-- <h5 *ngIf="items.solicitud_cambios?.facebook">Nuevo facebook: {{ items.solicitud_cambios?.facebook }} fecha {{ items.solicitud_cambios?.fecha_solicitud | date :'short'}}</h5> -->
+                <!-- <h5 *ngIf="items.solicitud_cambios?.instagram">Nuevo instagram: {{ items.solicitud_cambios?.instagram }} fecha {{ items.solicitud_cambios?.fecha_solicitud | date :'short'}}</h5> -->
+                <!-- <h5 *ngIf="items.solicitud_cambios?.youtbe">Nuevo youtbe: {{ items.solicitud_cambios?.youtbe }} fecha {{ items.solicitud_cambios?.fecha_solicitud | date :'short'}}</h5> -->
+                <!-- <h5 *ngIf="items.solicitud_cambios?.telefono">Nuevo telefono: {{ items.solicitud_cambios?.telefono }} fecha {{ items.solicitud_cambios?.fecha_solicitud | date :'short'}}</h5> -->
+                <!-- <h5 *ngIf="items.solicitud_cambios?.profesion">Nueva profesion: {{ items.solicitud_cambios?.profesion }} fecha {{ items.solicitud_cambios?.fecha_solicitud | date :'short'}}</h5> -->
+                
+                <div *ngIf="items.solicitud_cambios?.nombre" class="d-flex justify-content-between mb-3 background-z-2 p-4">
+                  <div class="mr-4">
+                      <h6>Nuevo Nombre: </h6>
+                      <h6 class="font-light">{{ items.solicitud_cambios?.nombre }}</h6>
+                      <h6 class="font-light"><i class="bi bi-calendar3"></i> {{ items.solicitud_cambios?.fecha_solicitud | date :'short'}}</h6>
+                  </div>
+                </div>
+
+                <div *ngIf="items.solicitud_cambios?.apellido" class="d-flex justify-content-between mb-3 background-z-2 p-4">
+                  <div class="mr-4">
+                      <h6>Nuevo Apellido: </h6>
+                      <h6 class="font-light">{{ items.solicitud_cambios?.apellido }}</h6>
+                      <h6 class="font-light"><i class="bi bi-calendar3"></i> {{ items.solicitud_cambios?.fecha_solicitud | date :'short'}}</h6>
+                  </div>
+                </div>
+
+                <div *ngIf="items.solicitud_cambios?.email" class="d-flex justify-content-between mb-3 background-z-2 p-4">
+                  <div class="mr-4">
+                      <h6>Nuevo Email: </h6>
+                      <h6 class="font-light">{{ items.solicitud_cambios?.email }}</h6>
+                      <h6 class="font-light"><i class="bi bi-calendar3"></i> {{ items.solicitud_cambios?.fecha_solicitud | date :'short'}}</h6>
+                  </div>
+                </div>
+
+                <div *ngIf="items.solicitud_cambios?.facebook" class="d-flex justify-content-between mb-3 background-z-2 p-4">
+                  <div class="mr-4">
+                      <h6>Nuevo Facebook: </h6>
+                      <h6 class="font-light">{{ items.solicitud_cambios?.facebook }}</h6>
+                      <h6 class="font-light"><i class="bi bi-calendar3"></i> {{ items.solicitud_cambios?.fecha_solicitud | date :'short'}}</h6>
+                  </div>
+                </div>
+
+                <div *ngIf="items.solicitud_cambios?.instagram" class="d-flex justify-content-between mb-3 background-z-2 p-4">
+                  <div class="mr-4">
+                      <h6>Nuevo Instagram: </h6>
+                      <h6 class="font-light">{{ items.solicitud_cambios?.instagram }}</h6>
+                      <h6 class="font-light"><i class="bi bi-calendar3"></i> {{ items.solicitud_cambios?.fecha_solicitud | date :'short'}}</h6>
+                  </div>
+                </div>
+
+                <div *ngIf="items.solicitud_cambios?.youtbe" class="d-flex justify-content-between mb-3 background-z-2 p-4">
+                  <div class="mr-4">
+                      <h6>Nuevo Youtube: </h6>
+                      <h6 class="font-light">{{ items.solicitud_cambios?.youtbe }}</h6>
+                      <h6 class="font-light"><i class="bi bi-calendar3"></i> {{ items.solicitud_cambios?.fecha_solicitud | date :'short'}}</h6>
+                  </div>
+                </div>
+
+                <div *ngIf="items.solicitud_cambios?.telefono" class="d-flex justify-content-between mb-3 background-z-2 p-4">
+                  <div class="mr-4">
+                      <h6>Nuevo Telefono: </h6>
+                      <h6 class="font-light">{{ items.solicitud_cambios?.telefono }}</h6>
+                      <h6 class="font-light"><i class="bi bi-calendar3"></i> {{ items.solicitud_cambios?.fecha_solicitud | date :'short'}}</h6>
+                  </div>
+                </div>
+
+                <div *ngIf="items.solicitud_cambios?.profesion" class="d-flex justify-content-between mb-3 background-z-2 p-4">
+                  <div class="mr-4">
+                      <h6>Nueva profesion: </h6>
+                      <h6 class="font-light">{{ items.solicitud_cambios?.profesion }}</h6>
+                      <h6 class="font-light"><i class="bi bi-calendar3"></i> {{ items.solicitud_cambios?.fecha_solicitud | date :'short'}}</h6>
+                  </div>
+                </div>
+
+                <div *ngIf="items.solicitud_cambios?.descripcion" class="d-flex justify-content-between mb-3 background-z-2 p-4">
+                  <div class="mr-4">
+                      <h6>Nueva descripcion: </h6>
+                      <h6 class="font-light">{{ items.solicitud_cambios?.descripcion }}</h6>
+                      <h6 class="font-light"><i class="bi bi-calendar3"></i> {{ items.solicitud_cambios?.fecha_solicitud | date :'short'}}</h6>
+                  </div>
+                </div>
+                
+                <div class="img-wrapper w-100 round overflow-hidden d-flex justify-content-start align-items-center" *ngIf="items.solicitud_cambios?.img_perfil">
+                    <div class="img mr">
+                      <img [src]="'../../assets/img/' + items.solicitud_cambios?.img_perfil" (error)="imagenError($event)" >
+                    </div>
+                    <h6 class="font-light">Nueva foto de perfil</h6>
+                  </div>
+
+                <div class="img-wrapper w-100 round overflow-hidden d-flex justify-content-start align-items-center" *ngIf="items.solicitud_cambios?.imgBanner">
+                  <div class="img mr">
+                    <img [src]="'../../assets/img/' + items.solicitud_cambios?.imgBanner" (error)="imagenError($event)" >
+                  </div>
+                  <h6 class="font-light">Nuevo banner</h6>
+                  </div>
+              </div>
+                
+            </div>
+            <div class="actions-wrap d-flex justify-content-center align-items-center" [id]=" 'data-' + items.solicitud_cambios.id">
+                <button class="btn btn-primary" type="button" (click)="aprobarTicket( items.solicitud_cambios.id )"><i class="bi bi-check"></i> Aprobar</button>
+                <button class="btn delete-btn" (click)="rechazarMenu(items.solicitud_cambios.id)"><i class="bi bi-x-circle"></i> Rechazar</button>
+            </div>       
+              <!-- rechazar Tickets -->
+              <div class="actions-wrap d-flex justify-content-center align-items-center d-none" [id]=" 'rechazar-' + items.solicitud_cambios.id">
+                <form [formGroup]="rechazarForm">
+                    <div class="parte-1">
+                      <h5 class="text-center text-dark p-3">Rechazar Cambio</h5>
+                      <select class="form-control" formControlName="Id_Violacion">
+                        <option value="" disabled>Seleccione</option>
+                        <option *ngFor="let violacion of violaciones" [ngValue]="violacion.id">{{violacion.nombre}}</option>        
+                      </select>   
+                      <div *ngIf="submitted && f.Id_Violacion.errors">
+                        <p class="form-text text-danger" *ngIf="f.Id_Violacion.errors.required" >Debe seleccionar un motivo.</p>
+                      </div>                  
+                      <div class="form-group mt-2">
+                        <label for="exampleFormControlTextarea1">Agregar mas detalles</label>
+                        <textarea class="form-control" rows="3" formControlName="Detalle"></textarea>
+                      </div>
+                      <div class="d-flex justify-content-center">
+                        <button class="btn btn-primary m-3" type="button" (click)="cancelarRechazo(items.solicitud_cambios.id)">Cancelar</button>
+                        <button class="btn btn-danger m-3" type="button" (click)="rechazarTicket( items.solicitud_cambios.id )">Rechazar</button>
+                      </div>
+                    </div>
+          
+                </form>
+            </div>       
+        </div>
+    </div>
+</section> 
+
+<section *ngIf="ticketPendientes.length == 0" class="container">
+    <div class="results-wrap p-3">
+        <h5>No existen tickets pendientes</h5>
+    </div>
+</section>

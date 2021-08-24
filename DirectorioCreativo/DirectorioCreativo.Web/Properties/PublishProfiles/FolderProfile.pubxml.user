@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--
+https://go.microsoft.com/fwlink/?LinkID=208121. 
+-->
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <_PublishTargetUrl>C:\Users\martin.perez\Desktop\Directiorio_Creativo\Publicacion</_PublishTargetUrl>
+    <History>True|2021-08-10T15:21:50.9688891Z;True|2021-08-10T11:08:31.2909959-04:00;True|2021-08-10T10:19:58.5382681-04:00;True|2021-08-10T10:19:50.8968110-04:00;True|2021-08-10T09:45:15.5581471-04:00;True|2021-08-10T09:34:34.9907308-04:00;True|2021-08-10T09:20:20.6089647-04:00;True|2021-08-10T09:13:40.5503704-04:00;True|2021-08-10T09:02:21.3132905-04:00;True|2021-08-09T15:24:13.1040756-04:00;True|2021-08-09T15:16:41.9425848-04:00;True|2021-08-09T15:10:12.7518722-04:00;True|2021-08-05T11:40:40.9511527-04:00;True|2021-08-03T14:52:35.3436493-04:00;True|2021-07-14T09:16:59.7975085-04:00;True|2021-06-01T13:16:45.7645055-04:00;True|2021-06-01T09:29:15.4260346-04:00;True|2021-05-27T15:24:11.1507796-04:00;True|2021-05-27T14:43:59.1617072-04:00;True|2021-05-27T14:38:42.8484733-04:00;</History>
+  </PropertyGroup>
+</Project>

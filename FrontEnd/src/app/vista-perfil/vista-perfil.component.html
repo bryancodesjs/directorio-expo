@@ -1,0 +1,106 @@
+<div class="overflow-hidden container-fluid fixed-top-margin profile-banner-wrap border-bottom" >
+  <img  [src]=" infoUser?.imgBanner ? '/assets/img/' + infoUser?.imgBanner : '/assets/default-banner.png' ">
+
+</div> 
+
+<div class="container p-5 background" (window:scroll)="scrollRead()">
+    <div class="d-flex profile-wrap">
+        <div id="userField" class="col-lg-2  user-field background"> 
+            <div class="user-field-inner sticky-top border round p-3 background-primary">
+            <div class="user-data d-flex flex-column text-center align-items-center">
+                <div class="user-profile-img-wrapper border rounded-circle d-flex justify-content-center align-items-center overflow-hidden bg-light">
+                  <img [src]=" infoUser?.img_perfil != null ? '/assets/img/' + infoUser?.img_perfil : '/assets/default-perfil.png' ">
+                </div>
+                <h4>{{ infoUser.artista }}</h4>
+                <h5>{{ infoUser.profesion }}</h5>
+                <button (click)="Contactar()" type="button" class="btn btn-primary">Contacta a {{ infoUser.nombre }}</button>
+                <div class="socialmedia-wrap d-flex pt-2 pb-3">
+                    <a href=""><i class="bi bi-instagram"></i></a>
+                    <a href=""><i class="bi bi-facebook"></i></a>
+                    <a href=""><i class="bi bi-youtube"></i></a>
+                </div>
+            </div>
+
+            <div class="user-statistics d-flex flex-column">
+                <div class="stat d-flex justify-content-between w-100">
+                    <h5><small>Vistas</small></h5>
+                    <h5><small>{{ infoUser.visitas }}</small></h5>
+                </div>
+                <div class="stat d-flex justify-content-between w-100">
+                    <h5><small>Valoraciones</small></h5>
+                    <h5><small>{{ infoUser.valoraciones }}</small></h5>
+                </div>
+            </div>
+
+            <div class="about w-100 pt-3 pb-3">
+                <p class="text-wraps">{{ infoUser.descripcionGeneral }}</p>
+            </div>
+
+            <small>Miembro desde <span>{{ infoUser.fechaIngreso | date }}</span></small>
+            </div>
+        </div>
+
+        <div class="container-fluid grid mt-3 mb-5 animate__animated animate__fadeIn delay-1" *ngIf="obras"> <!-- d-flex flex-wrap justify-content-around -->
+            <div class="" *ngFor="let gallery of obras" > <!-- card-out -->
+              <div class="home-img-wrapper overflow-hidden d-flex justify-content-center align-items-center" >
+                <img [src]=" '/assets/img/' + gallery.imgObra" (error)="imagenError($event)">
+              </div>
+              <div class="info-wrap p-2 d-flex justify-content-between">
+                <div>
+                  <h6 class="no-margin">{{ gallery.nombreObra }}</h6>
+                  <a class="no-margin "  routerLink="/"><i>{{ gallery.artista }}</i></a>
+                </div>
+                <div class="d-flex justify-content-end" style="min-width: 110px !important;">
+                  <p class="mr10 ml10"><i class="bi bi-heart"></i> <span> {{ gallery.valoraciones }}</span></p>
+                  <p><i class="bi bi-eye"></i> <span> {{ gallery.visitas }}</span></p>
+                </div>
+              </div>    
+            </div>
+          </div>
+    </div>
+</div>
+
+<!-- modal de mensajeria -->
+<div *ngIf="contactarModal" class="modal-mensajeria">
+  <div class="backdrop h-100">
+    <div class="wrapper d-flex justify-content-center align-items-center h-100">
+      <div class="mensajeria-box background-z-2 round p-3">
+        <form [formGroup]="mensajeForm">
+          <h5>Contactar a <span>{{infoUser.artista}}</span></h5>
+          <hr>
+          <div class="form-group">
+            <label for="">Asunto</label>
+            <input formControlName="asunto" type="text" class="form-control" id="" placeholder="Escribir asunto...">
+          </div>
+          <div *ngIf="_submitMensaje && m.asunto.errors">
+            <p class="form-text text-danger" *ngIf="m.asunto.errors.required" >Asunto es requerido.</p>
+          </div>
+
+          <div class="form-group">
+            <label >Tipo de solicitud</label>
+            <select class="form-control" formControlName="tipo_solicitud">
+              <option value="" disabled selected>Seleccione</option>
+              <option *ngFor="let tipo of TiposSolicitud" [value]="tipo.id" >{{ tipo.nombre }}</option>
+            </select>
+            <div *ngIf="_submitMensaje && m.tipo_solicitud.errors">
+              <p class="form-text text-danger" *ngIf="m.tipo_solicitud.errors.required" >Tipo de solicitud es requerida.</p>
+            </div>
+          </div>
+          
+          <div class="form-group">
+            <label for="exampleFormControlTextarea1">Agregar detalles</label>
+            <textarea class="form-control font-light" id="exampleFormControlTextarea1" rows="3" formControlName="detalles"></textarea>
+          </div>
+          <div *ngIf="_submitMensaje && m.detalles.errors">
+            <p class="form-text text-danger" *ngIf="m.detalles.errors.required" >Detalles es requerido.</p>
+          </div>
+
+          <div class="d-flex justify-content-between mt-4">
+            <button type="button" (click)="EsconderModalMensajes()" class="btn btn-light">Cancelar</button>
+            <button type="button" class="btn btn-primary" (click)="EnviarMensaje()" >Enviar </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

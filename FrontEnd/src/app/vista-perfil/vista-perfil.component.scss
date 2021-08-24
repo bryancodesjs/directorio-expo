@@ -1,0 +1,27 @@
+
+.profile-banner-wrap {
+    height: 240px;
+    //background-image: url('../../assets/banner-img/banner-1.jpg') !important;
+    background-size: cover;
+    background-position: 50% 40%;
+}
+.user-field {
+    min-width: 300px;
+    /*transform: translateY(-130px);*/
+    background-color: white;
+    & img {
+        width: 100%;
+    }
+    .user-profile-img-wrapper {
+        width: 90px;
+        height: 90px;
+        background-size: cover;
+    }
+    .socialmedia-wrap {
+        a i {
+            font-size: 20px;
+            margin: 0px 5px;
+        }
+    }
+}
+

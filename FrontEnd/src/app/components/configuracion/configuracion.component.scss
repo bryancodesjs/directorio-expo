@@ -1,0 +1,64 @@
+.container-fluid {
+    margin-top: 55px;
+    margin-bottom:550px !important;
+    .user-field-inner {
+        min-width: 241px;
+        .user-data {
+            margin-top: -60px;
+        }
+        .mini-banner-wrapper {
+            height: 133px;
+            // background-image: url('../../assets/banner-img/banner-1.jpg');
+            background-size: cover;
+            background-position: (50% 40%);
+        }
+    }
+    .user-profile-img-wrapper {
+        width: 90px;
+        height: 90px;
+        // background-image: url('../../assets/denice.PNG');
+        background-size: cover;
+    }
+    .socialmedia-wrap {
+        a i {
+            font-size: 20px;
+            margin: 0px 5px;
+        }
+    }
+    .statistics-wrap {
+        .statistics {
+            width: 100%;
+        }
+        .row {
+            margin-left:0 !important;
+        }
+    }
+}
+.thumbnail {
+    overflow: hidden;
+    & img {
+        width: 100%;
+    }
+}
+button i {
+    margin-right: 30px;
+}
+.font-light {
+    font-weight: 300 !important;
+}
+.about-author {
+    width: 100% !important;
+}
+.estado-box {
+    min-width: 150px;
+    margin-left: 20px;
+}
+.contacto {
+    input {
+        width: 95% !important;
+    }
+}
+.list-group-item.active {
+    background-color: #0460b3 !important;
+    border-color: #0460b3 !important;
+}

@@ -1,0 +1,98 @@
+<div class="container-fluid view-padding background pt-5 mb-5 ">
+    <nav aria-label="breadcrumb" *ngIf="!backOffice">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="#" routerLink="/">Inicio</a></li>
+          <li class="breadcrumb-item" aria-current="page"><a routerLink="/dashboard">Mi perfil</a></li>
+          <li class="breadcrumb-item active" aria-current="page">Mensajeria</li>
+        </ol>
+    </nav>
+    <section class="container pt-5">
+        <div class="chatbox-limiter">
+            <div class="chatbox-wrap overflow-hidden background-z-2 h-100">
+                <div class="d-flex h-100">
+                    <div class="col-lg-3 overflow-auto">
+                        <div class="d-flex flex-column chat-list-column">
+                            <div class="chat-filter d-flex background-z-3 justify-content-between align-items-center p-4">
+                                <!-- filtro de conversaciones -->
+                                <select name="" id="">
+                                    <option value="">Todas las conversaciones</option>
+                                    <option value="">No leidas</option>
+                                </select>
+                                <!-- boton de busqueda -->
+                                <i class="bi bi-search"></i>
+                            </div>
+
+                            <!-- listado de conversaciones -->
+                            <div class="chat-list">
+                                <ul>
+                                    <!-- Si no tiene chats creados-->
+                                    <p *ngIf="Chats.length == 0" class="text text-danger">No tienes chats Disponibles</p>
+                                    <!-- cada li es un chat individual-->
+                                    <li class="active" *ngFor="let mensa of Chats" (click)="verMensajes(mensa,true)">
+                                        <div class="user-chat-wrap">
+                                            <div class="user-chat p-4 d-flex align-items-center">
+                                                <div class="user-pic mr">
+                                                    <img *ngIf="mensa.foto != null" class="w-100" [src]=" '../../assets/img/' + mensa.foto">
+                                                    <img *ngIf="mensa.foto == null" class="w-100" src="../../assets/default-perfil.png">
+                                                    <!-- indicador de nuevo mensaje-->
+                                                </div>
+                                                <div class="user-name">
+                                                    <div class="name d-flex">
+                                                        <h6 class="mb-0">{{ mensa.artista }}</h6>
+                                                        <!-- cantidad de mensajes no leidos de una conversacion -->
+                                                        <div *ngIf="mensa.cantidadnoLeido" class="notification"><h6 class="mb-0">{{ mensa.cantidadnoLeido }}</h6></div>
+                                                    </div>
+                                                    <small *ngIf="mensa.idReceptor != userId && mensa.receptorOnline" class="text text-success">Online</small>
+                                                    <small *ngIf="mensa.cantidadnoLeido" class="font-light">{{ mensa.fecha | date: 'short' }}</small>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div *ngIf="chatSelect" class="col-lg-9 h-100 d-flex flex-column background-pattern">
+                       <div class="chat-header d-flex justify-content-between p-4 background-z-3">
+                           <div class="identity d-flex align-items-center">
+                                <div class="img-wrap mr">
+                                    <img *ngIf="historialMensajes.foto != null" [src]=" '../../assets/img/' + historialMensajes.foto">
+                                    <img *ngIf="historialMensajes.foto == null" src="../../assets/default-perfil.png">
+                                </div>
+                                <div class="username-wrap">
+                                    <h6 class="mb-0">{{ historialMensajes.artista }}</h6>
+                                    <!-- <small class="font-light">3:24 PM - Aug 4, 2021</small> -->
+                                </div>
+                           </div>
+                           <div class="actions d-flex align-items-center">
+                               <h2 title="Eliminar conversacion"><i class="bi bi-trash2"></i></h2>
+                           </div>
+                        </div>
+
+                        <div id="scroll" class="messages overflow-auto">
+                            <!-- mensaje entrante -->
+                            <div *ngFor="let mensajes of historialMensajes.mensajes; let i = index" [ngClass]=" mensajes.idReceptor == userId ? 'incoming d-flex justify-content-start p-4 flex-column': 'outgoing d-flex justify-content-end align-items-end p-4 flex-column' ">
+                                <div class="message p-3 background-z-3 round">
+                                    <p>{{ mensajes.mensaje }}</p>
+                                </div>
+                                <small class="font-light">{{ mensajes.fecha | date: 'shortTime' }} &nbsp; &nbsp; <i *ngIf="!mensajes.leido" class="bi bi-check2"></i> &nbsp; &nbsp; <i *ngIf="mensajes.leido" class="bi bi-check2-all"></i></small>
+                            </div>                                                      
+                        </div>
+
+                        <div class="chat-input d-flex justify-content-between w-100 p-4 background-z-3 align-items-center">
+                            <form [formGroup]="mensajeForm" class="d-flex w-100 justify-content-between">
+                                <textarea (click)="mensajeLeido(historialMensajes.idChat)" (keyup.enter)="EnviarMensaje()" formControlName="detalles" type="text" placeholder="Escriba un mensaje..."></textarea>
+                                <div disabled *ngIf="!this.mensajeForm.invalid" class="send-btn d-flex justify-content-center align-items-center">
+                                    <img (click)="EnviarMensaje()" src="../../assets/send-button.png">
+                                </div>
+                            </form>                            
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>

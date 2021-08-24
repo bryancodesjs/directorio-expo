@@ -1,0 +1,655 @@
+
+<div class="container-fluid view-padding background pt-5 mb-5 ">
+    <!-- <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="#" routerLink="/">Inicio</a></li>
+          <li class="breadcrumb-item" aria-current="page"><a href="" routerLink="/dashboard">Mi perfil</a></li>
+          <li class="breadcrumb-item active" aria-current="page">Configuracion</li>
+        </ol>
+    </nav> -->
+
+    <section class="container pt-5">
+        <div class="row">
+            <div class="col-lg-3 mb-5">
+                <div class="list-group">
+                    <button (click)="select('misdatos')" type="button" [ngClass]="misDatos ? 'list-group-item list-group-item-action active' : 'list-group-item list-group-item-action' "><i class="bi bi-person"></i> Mis Datos</button>
+                    <button (click)="select('servicios')" type="button" [ngClass]="servicios ? 'list-group-item list-group-item-action active' : 'list-group-item list-group-item-action' "><i class="bi bi-journal-text"></i> Servicios</button>
+                    <button (click)="select('contacto')" type="button" [ngClass]="contacto ? 'list-group-item list-group-item-action active' : 'list-group-item list-group-item-action' "><i class="bi bi-chat-text"></i> Contacto</button>
+                    <button (click)="select('seguridad')" type="button" [ngClass]="seguridad ? 'list-group-item list-group-item-action active' : 'list-group-item list-group-item-action' "><i class="bi bi-shield-lock"></i> Seguridad</button>
+                    <button (click)="select('personalizacion')" type="button" [ngClass]="personalizacion ? 'list-group-item list-group-item-action active' : 'list-group-item list-group-item-action' "><i class="bi bi-brush"></i> Personalizacion</button>
+                    <button (click)="select('solicitudes')" type="button" [ngClass]="solicitudes ? 'list-group-item list-group-item-action active' : 'list-group-item list-group-item-action' "><i class="bi bi-list-ol"></i> Mis Solicitudes</button>
+                </div>
+            </div>
+            <div class="col-lg-9" *ngIf="misDatos || personalizacion || contacto || seguridad || solicitudes || servicios" >
+                <div class="d-flex background flex-column background-z-3">
+                   
+                    <!-- MIS DATOS -->
+                    <div class="" *ngIf="misDatos">
+                        <h4>Mis Datos</h4>
+                        <form [formGroup]="misDatosForm" (ngSubmit)="actualizarMisDatos()">
+                            <div class="row mb-3">
+                                <div class="col-lg-6">
+                                    <label class="form-label">Nombre</label>
+                                    <input type="text" class="form-control" formControlName="nombre" [placeholder]="contactoForm.value.nombre == null && cargando ? 'Cargando....' : contactoForm.value.nombre == null || contactoForm.value.nombre == '' && !cargando ? 'Puedes introducir tu telefono celular' : contactoForm.value.nombre">     
+                                    <div *ngIf="submit && misDatosControls.nombre.errors">
+                                      <p class="form-text text-danger" *ngIf="misDatosControls.nombre.errors.required">Tu nombre es requerido.</p>
+                                    </div>                        
+                                  </div>
+                                  <div class="col-lg-6">
+                                      <label class="form-label">Apellido</label>
+                                      <input type="text" class="form-control" formControlName="apellido" [placeholder]="contactoForm.value.apellido == null && cargando ? 'Cargando....' : contactoForm.value.apellido == null || contactoForm.value.apellido == '' && !cargando ? 'Puedes introducir tu telefono celular' : contactoForm.value.apellido">    
+                                      <div *ngIf="submit && misDatosControls.apellido.errors">
+                                          <p class="form-text text-danger" *ngIf="misDatosControls.apellido.errors.required">Tu apellido es requerido.</p>
+                                      </div>                              
+                                  </div>
+                            </div>
+                            <div class="row mb-3">
+                                <div class="col-lg-6">
+                                    <label class="form-label">Nacionalidad</label>
+                                    <input type="text" class="form-control" formControlName="nacionalidad" [placeholder]="contactoForm.value.nacionalidad == null && cargando ? 'Cargando....' : contactoForm.value.nacionalidad == null || contactoForm.value.nacionalidad == '' && !cargando ? 'Introduce tu nacionalidad' : contactoForm.value.nacionalidad">    
+                                    <div *ngIf="submit && misDatosControls.nacionalidad.errors">
+                                        <p class="form-text text-danger" *ngIf="misDatosControls.nacionalidad.errors.required">Tu Nacionalidad es requerido.</p>
+                                    </div>                              
+                                </div>
+                                <div class="col-lg-6">
+                                    <label class="form-label">Lugar de nacimiento</label>
+                                    <input type="text" class="form-control" formControlName="lugarNacimiento" [placeholder]="contactoForm.value.lugarNacimiento == null && cargando ? 'Cargando....' : contactoForm.value.lugarNacimiento == null || contactoForm.value.lugarNacimiento == '' && !cargando ? 'Introduce tu lugar de nacimiento' : contactoForm.value.lugarNacimiento">    
+                                    <div *ngIf="submit && misDatosControls.lugarNacimiento.errors">
+                                        <p class="form-text text-danger" *ngIf="misDatosControls.lugarNacimiento.errors.required">Tu Lugar de Nacimiento es requerido.</p>
+                                    </div>                              
+                                </div>
+                            </div>
+                            <div class="row ">
+                                <div class="col-lg-6">
+                                    <div class="mb-3">
+                                        <label class="form-label">Rango de Edad</label>
+                                        <select class="form-control" formControlName="rangoEdad">                                        
+                                            <option *ngIf="misDatosForm.value.rangoEdad == null && cargando" value="">Cargando.....</option>
+                                            <option *ngIf="misDatosForm.value.rangoEdad != null && misDatosForm.value.rangoEdad != '' " disabled selected [value]="misDatosForm.value?.rangoEdad">{{ misDatosForm.value?.rangoEdad }}</option>
+                                            <option *ngIf="misDatosForm.value.rangoEdad == null || contactoForm.value.rangoEdad == '' && !cargando " value="" disabled selected>Selecciona tu edad</option>   
+                                            <option value="Fotografo">De 18 a 23</option>
+                                            <option value="1">De 24 a 29</option>
+                                            <option value="Cantante">De 30 a 35</option>
+                                            <option value="Cantante">De 33 a 38</option>
+                                            <option value="Cantante">De 39 a 44</option>
+                                            <option value="Cantante">Mayor de 45</option>
+                                        </select>
+                                        <!-- ERRORES AQUI -->
+                                        <div *ngIf="submit && misDatosControls.rangoEdad.errors">
+                                            <p class="form-text text-danger" *ngIf="misDatosControls.rangoEdad.errors.required">Tu Rango de Edad es requerido.</p>
+                                        </div> 
+                                    </div>                             
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="mb-3">
+                                        <label class="form-label">Genero</label>
+                                        <select class="form-control" formControlName="genero">                                       
+                                            <option *ngIf="misDatosForm.value.genero == null && cargando" value="">Cargando.....</option>
+                                            <option *ngIf="misDatosForm.value.genero != null && misDatosForm.value.genero != '' " disabled selected [value]="misDatosForm.value?.genero">{{ misDatosForm.value?.genero }}</option>
+                                            <option *ngIf="misDatosForm.value.genero == null || contactoForm.value.genero == '' && !cargando " value="" disabled selected>Selecciona tu genero</option>   
+                                            <option value="Masculino">Masculino</option>
+                                            <option value="Escritor">Femenino</option>
+                                            <option value="Cantante">Otro</option>
+                                        </select>
+                                        <!-- ERRORES AQUI -->
+                                        <div *ngIf="submit && misDatosControls.genero.errors">
+                                            <p class="form-text text-danger" *ngIf="misDatosControls.genero.errors.required">Tu Genero es requerido.</p>
+                                        </div>  
+                                    </div>                             
+                                </div>
+                            </div>
+                            <div class="mb-5">
+                                <label class="form-label">Cedula de Identidad</label>
+                                <input type="text" class="form-control" formControlName="cedula" [placeholder]="contactoForm.value.cedula == null && cargando ? 'Cargando....' : contactoForm.value.cedula == null || contactoForm.value.cedula == '' && !cargando ? 'Introduce tu cedula' : contactoForm.value.cedula">    
+                                <div *ngIf="submit && misDatosControls.cedula.errors">
+                                    <p class="form-text text-danger" *ngIf="misDatosControls.cedula.errors.required">Tu Cedula de Identidad es requerido.</p>
+                                </div>                              
+                            </div>                           
+                            <div class="mb-3">
+                                <label class="form-label">Dirección de residencia actual</label>
+                                <input type="text" class="form-control" formControlName="direccion_residencia" [placeholder]="contactoForm.value.direccion_residencia == null && cargando ? 'Cargando....' : contactoForm.value.direccion_residencia == null || contactoForm.value.direccion_residencia == '' && !cargando ? 'Introduce tu direccion residencial' : contactoForm.value.direccion_residencia">    
+                                <div *ngIf="submit && misDatosControls.direccion_residencia.errors">
+                                    <p class="form-text text-danger" *ngIf="misDatosControls.direccion_residencia.errors.required">Tu Dirección de residencia actual es requerido.</p>
+                                </div>                              
+                            </div>  
+                            <div class="row mb-3">
+                                <div class="col-lg-6">
+                                    <div class="mb-3">
+                                        <label class="form-label">Provincia</label>
+                                        <select class="form-control" formControlName="provincia">      
+                                            <option *ngIf="misDatosForm.value.provincia == null && cargando" value="">Cargando.....</option>
+                                            <option *ngIf="misDatosForm.value.provincia != null && misDatosForm.value.provincia != '' " disabled selected [value]="misDatosForm.value?.provincia">{{ misDatosForm.value?.provincia }}</option>
+                                            <option *ngIf="misDatosForm.value.provincia == null || contactoForm.value.provincia == '' && !cargando " value="" disabled selected>Selecciona tu provincia</option>   
+                                            <option value="Fotografo">Santo Domingo</option>
+                                            <option value="Escritor">Azua</option>                                                                   
+                                        </select>
+                                        <!-- ERRORES AQUI -->
+                                        <div *ngIf="submit && misDatosControls.provincia.errors">
+                                            <p class="form-text text-danger" *ngIf="misDatosControls.provincia.errors.required">Tu Provincia es requerida.</p>
+                                        </div>   
+                                    </div>                             
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="mb-3">
+                                        <label class="form-label">Municipio</label>
+                                        <select class="form-control" formControlName="municipio">    
+                                            <option *ngIf="misDatosForm.value.municipio == null && cargando" value="">Cargando.....</option>
+                                            <option *ngIf="misDatosForm.value.municipio != null && misDatosForm.value.municipio != '' " disabled selected [value]="misDatosForm.value?.municipio">{{ misDatosForm.value?.municipio }}</option>
+                                            <option *ngIf="misDatosForm.value.municipio == null || contactoForm.value.municipio == '' && !cargando " value="" disabled selected>Selecciona tu municipio</option>   
+                                            <option value="Fotografo">Mameyes</option>
+                                            <option value="Escritor">Isabela</option>                                      
+                                        </select>
+                                        <!-- ERRORES AQUI -->
+                                        <div *ngIf="submit && misDatosControls.municipio.errors">
+                                            <p class="form-text text-danger" *ngIf="misDatosControls.municipio.errors.required">Tu Municipio es requerido.</p>
+                                        </div>
+                                    </div>                             
+                                </div>
+                            </div>                         
+                            <button type="submit" class="btn btn-primary" [disabled]="misDatosForm.invalid">Guardar</button>
+                          </form>
+                    </div>
+
+                    <!-- SERVICIOS -->
+                    <div class="" *ngIf="servicios">
+                        <h4>Servicios</h4>
+                        <div class="d-flex flex-wrap">
+
+                        
+                            <div class="row w-100">
+                                <div class="mb-3 col-lg-6 mb-3">
+                                    <form [formGroup]="categoriaServiciosForm" (ngSubmit)="nuevaCategoria()">
+                                    <div class="mb-3">
+                                        <label class="form-label">Categoria de servicios</label>
+                                        <select class="form-control" formControlName="nombre">    
+                                            <option *ngIf="categoriaServiciosForm.value.nombre == null && cargando" value="">Cargando.....</option>
+                                            <option *ngIf="categoriaServiciosForm.value.nombre != null && categoriaServiciosForm.value.nombre != '' " disabled selected [value]="categoriaServiciosForm.value?.nombre">{{ categoriaServiciosForm.value?.nombre }}</option>
+                                            <option *ngIf="categoriaServiciosForm.value.nombre == null || categoriaServiciosForm.value.nombre == '' && !cargando " value="" disabled selected>Selecciona tu Categoria</option>   
+                                            <option value="Fotografo">Mameyes</option>
+                                            <option value="Escritor">Isabela</option>                                     
+                                        </select>
+                                        <!-- ERRORES AQUI -->
+                                        <div *ngIf="submitCategoria && categoriaServiciosControls.nombre.errors">
+                                            <p class="form-text text-danger" *ngIf="categoriaServiciosControls.nombre.errors.required">Tu Categoria es requerida.</p>
+                                        </div> 
+                                    </div>
+                                    <button type="submit" class="btn accent w-100 mt-3"><i class="bi bi-arrow-down-circle"></i> Agregar</button>   
+                                    </form>
+                                     <!-- LISTA DE SERVICIOS -->
+                                     <table class="table table-striped">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">#</th>                                                
+                                                <th scope="col">Servicio</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr *ngIf="categoriaServicios.length == 0">
+                                                <th scope="row">0</th>                                               
+                                                <td>Sin datos</td>                                                
+                                            </tr>
+                                            <tr *ngFor="let item of categoriaServicios">
+                                                <th scope="row">{{ item.Id }}</th>                                               
+                                                <td>{{ item.categoriaServicio }}</td>
+                                            </tr>                                            
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                                <div class="col-lg-6">
+                                    <form [formGroup]="tipoServiciosForm" (ngSubmit)="nuevoServicio()">
+                                    <div class="mb-3">
+                                        <label class="form-label">Tipo de servicios</label>
+                                        <select class="form-control" formControlName="nombre">    
+                                            <option *ngIf="tipoServiciosForm.value.nombre == null && cargando" value="">Cargando.....</option>
+                                            <option *ngIf="tipoServiciosForm.value.nombre != null && tipoServiciosForm.value.nombre != '' " disabled selected [value]="tipoServiciosForm.value?.nombre">{{ tipoServiciosForm.value?.nombre }}</option>
+                                            <option *ngIf="tipoServiciosForm.value.nombre == null || tipoServiciosForm.value.nombre == '' && !cargando " value="" disabled selected>Selecciona tu Servicio</option>   
+                                            <option value="Fotografo">Mameyes</option>
+                                            <option value="Escritor">Isabela</option>                                     
+                                        </select>
+                                        <!-- ERRORES AQUI -->
+                                        <div *ngIf="submitTipoServicio && tipoServiciosControls.nombre.errors">
+                                            <p class="form-text text-danger" *ngIf="tipoServiciosControls.nombre.errors.required">Tu Servicio es requerida.</p>
+                                        </div>
+                                    </div>
+                                    <button type="submit" class="btn w-100 accent mt-3"><i class="bi bi-arrow-down-circle"></i> Agregar</button>
+                                    </form>
+                                    <!-- LISTA DE SERVICIOS -->
+                                    <table class="table table-striped">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">#</th>
+                                                <th scope="col">Area</th>
+                                                <th scope="col">Servicio</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr *ngIf="tipoServicios.length == 0">
+                                                <th scope="row">0</th>                                               
+                                                <td>Sin datos</td>
+                                                <td>Sin datos</td>
+                                            </tr>                                            
+                                            <tr *ngFor="let item of tipoServicios">
+                                                <th scope="row">{{ item.Id }}</th>                                               
+                                                <td>{{ item.tipoServicio }}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>    
+                            </div>
+                        </div>
+                    </div>
+
+
+                   <!-- PERSONALIZACION -->
+                    <div class="" *ngIf="personalizacion">
+                        <h4>Personalizacion</h4>
+                        <form [formGroup]="FotosForm" (ngSubmit)="actualizarFotos()">
+                            <div class="d-flex w-100 flex-wrap">
+                                <div class="col-lg-6 d-flex justify-content-center flex-column align-items-center">
+                                    <label class="mb-4">Buscar nueva en mi dispositivo</label>
+                                    <!-- boton de subir archivos-->
+                                    <div class="file-upload">
+                                        <input (click)="ComprimirPerfil()" class="form-control-file" accept="image/*">
+                                        <i class="bi bi-upload"></i>
+                                    </div>
+                                    <label>Foto de Perfil Actual</label>
+                                    <div class="config-profile-banner-wrap d-flex justify-content-center align-items-center">      
+                                        <img *ngIf="nuevaFotoPerfil == null" [src]=" FotosForm.value.img_perfil != null ? '../../assets/img/' + FotosForm.value.img_perfil : '../../assets/no-image.png' ">
+                                        <img [src]="nuevaFotoPerfil">
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 d-flex justify-content-center flex-column align-items-center">
+                                    <label class="mb-4">Buscar nueva en mi dispositivo</label>
+                                    <!-- boton de subir archivos-->
+                                    <div class="file-upload">
+                                        <input  class="form-control-file" accept="image/*">
+                                        <i (click)="ComprimirBanner()" class="bi bi-upload"></i>
+                                    </div>
+                                    <label>Foto de Portada Actual</label>
+                                    <div class="config-profile-banner-wrap d-flex justify-content-center align-items-center">                                        
+                                        <img *ngIf="nuevaFotoBanner == null" [src]=" FotosForm.value.img_banner != null ? '../../assets/img/' + FotosForm.value.img_banner : '../../assets/no-image.png' ">
+                                        <img [src]="nuevaFotoBanner">
+                                    </div>
+                                </div>
+                            </div>
+                            <button type="submit" class="btn btn-primary mt-3">Guardar</button>
+                        </form>
+                    </div>
+                    
+                    <!-- CONTACTO -->
+                    <div class="contacto" *ngIf="contacto">
+                        <h4>Contacto</h4>
+                        <form [formGroup]="contactoForm" (ngSubmit)="actualizarContacto()">
+                            <div class="d-flex w-100 flex-wrap justify-content-between">
+                                <div class="col-lg-6">
+                                    <div class="mb-3">
+                                        <label for="Facebook" class="form-label"><i class="bi bi-phone-fill"></i> Teléfono celular</label>
+                                        <input type="text" class="form-control" formControlName="telefono_celular" [placeholder]="contactoForm.value.telefono_celular == null && cargando ? 'Cargando....' : contactoForm.value.telefono_celular == null || contactoForm.value.telefono_celular == '' && !cargando ? 'Puedes introducir tu telefono celular' : contactoForm.value.telefono_celular">                                         
+                                        <div *ngIf="submit && contactoControls.telefono_celular.errors">
+                                            <p class="form-text text-danger" *ngIf="contactoControls.telefono_celular.errors.required">Tu Teléfono celular es requerido.</p>
+                                        </div> 
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="Facebook" class="form-label"><i class="bi bi-telephone-plus-fill"></i> Teléfono fijo</label>
+                                        <input type="text" class="form-control" formControlName="telefono_fijo" [placeholder]="contactoForm.value.telefono_fijo == null && cargando ? 'Cargando....' : contactoForm.value.telefono_fijo == null || contactoForm.value.telefono_fijo == '' && !cargando ? 'Puedes introducir tu telefono fijo' : contactoForm.value.telefono_fijo">                                         
+                                        <div *ngIf="submit && contactoControls.telefono_fijo.errors">
+                                            <p class="form-text text-danger" *ngIf="contactoControls.telefono_fijo.errors.required">Tu Teléfono fijo es requerido.</p>
+                                        </div> 
+                                    </div>                                
+                        
+                                    <div class="mb-3">
+                                        <label for="Facebook" class="form-label"><i class="bi bi-facebook"></i> Facebook</label>
+                                        <input type="text" class="form-control" formControlName="facebook" [placeholder]="contactoForm.value.facebook == null && cargando ? 'Cargando....' : contactoForm.value.facebook == null || contactoForm.value.facebook == '' && !cargando ? 'Puedes introducir tu perfil de facebook' : contactoForm.value.facebook">                                         
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="Facebook" class="form-label"><i class="bi bi-twitter"></i> Twitter</label>
+                                        <input type="text" class="form-control" formControlName="twitter" [placeholder]="contactoForm.value.twitter == null && cargando ? 'Cargando....' : contactoForm.value.twitter == null || contactoForm.value.twitter == '' && !cargando ? 'Puedes introducir tu perfil de twitter' : contactoForm.value.twitter">                                         
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="Facebook" class="form-label"><i class="bi bi-linkedin"></i> LinkedIn</label>
+                                        <input type="text" class="form-control" formControlName="linkedin" [placeholder]="contactoForm.value.linkedin == null && cargando ? 'Cargando....' : contactoForm.value.linkedin == null || contactoForm.value.linkedin == '' && !cargando ? 'Puedes introducir tu perfil de linkedin' : contactoForm.value.linkedin">                                         
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="mb-3">
+                                        <label for="youtube" class="form-label"><i class="bi bi-youtube"></i> Youtube</label>
+                                        <input type="text" class="form-control"  formControlName="youtube" [placeholder]="contactoForm.value.youtube == null && cargando ? 'Cargando....' : contactoForm.value.youtube == null || contactoForm.value.youtube == '' && !cargando ? 'Puedes introducir tu canal de youtube' : contactoForm.value.youtube">
+                                    </div>
+                        
+                                    <div class="mb-3">
+                                        <label for="instagram" class="form-label"><i class="bi bi-instagram"></i> Instagram</label>
+                                        <input type="text" class="form-control" formControlName="instagram" [placeholder]="contactoForm.value.instagram == null && cargando ? 'Cargando....' : contactoForm.value.instagram == null || contactoForm.value.instagram == '' && !cargando ? 'Puedes introducir tu perfil de instagram' : contactoForm.value.instagram">
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label for="instagram" class="form-label"><i class="bi bi-envelope-fill"></i> Email</label>
+                                        <input type="text" class="form-control" formControlName="email" [placeholder]="contactoForm.value.email == null ? 'Cargando....' : contactoForm.value.email == '' ? 'Debes introducir tu correo electronico' : contactoForm.value.email">
+                                    </div>
+                                    <div *ngIf="submit && contactoControls.email.errors">
+                                        <p class="form-text text-danger" *ngIf="contactoControls.email.errors.required">Tu email es requerido.</p>
+                                    </div> 
+                                </div>
+
+                                <button type="submit" class="btn btn-primary" [disabled]="contactoForm.value.instagram == '' && contactoForm.value.youtube == '' && contactoForm.value.facebook == '' || contactoForm.invalid">Guardar</button>
+                            </div>                            
+                        </form>
+                    </div>
+
+                   <!-- SEGURIDAD -->
+                    <div class="" *ngIf="seguridad">
+                        <h4>Seguridad</h4>
+                        <form [formGroup]="nuevaClaveForm" (ngSubmit)="submitSeguridad()">
+                            <div class="mb-3">
+                                <label class="form-label">Contraseña Actual</label>
+                                <input formControlName="actual" type="password" class="form-control" placeholder="Contraseña actual">
+                                <div *ngIf="submit && seguridadControls.actual.errors">
+                                    <p class="form-text text-danger" *ngIf="seguridadControls.actual.errors.required">Contraseña actual.</p>
+                                </div>
+                            </div>
+                          
+                            <div class="mb-3">
+                                <label for="newPassword" class="form-label">Nueva Contraseña</label>
+                                <input type="password" class="form-control" formControlName="nueva" placeholder="Su nueva contraseña" >
+                                <div *ngIf="submit && seguridadControls.nueva.errors">
+                                    <p class="form-text text-danger" *ngIf="seguridadControls.nueva.errors.required">Digite su nueva contraseña.</p>
+                                </div>
+                                <div> <p class="form-text text-danger" *ngIf="errorClave">Las contraseñas no coinciden.</p> </div>
+                            </div>
+                            <div class="mb-3">
+                                <label for="passwordConfirmation" class="form-label">Confirmar Contraseña</label>
+                                <input type="password" class="form-control" formControlName="confirmar_nueva" placeholder="Confirmar nueva contraseña">
+                                <div *ngIf="submit && seguridadControls.confirmar_nueva.errors">
+                                    <p class="form-text text-danger" *ngIf="seguridadControls.confirmar_nueva.errors.required">Confirme contraseña.</p>
+                                </div>
+                                <div> <p class="form-text text-danger" *ngIf="errorClave">Las contraseñas no coinciden.</p> </div>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Guardar</button>
+                        </form>
+                    </div>
+
+                    <!-- MIS SOLICITUDES -->
+                    <div class="" *ngIf="solicitudes">
+                        <h4>Mis Solicitudes</h4>
+                        <p class="text-primary" style="cursor:pointer;" (click)="mostrarModal()">¿Porque puede ser rechazada mi solicitud?</p>
+                        
+                        <div class="result bg d-flex" *ngFor="let item of solicitudesRealizadas">                           
+                            <div class=" w-100 d-flex flex-column justify-content-between"> 
+                                <div class=" w-100">
+                                    
+                                    <div>
+                                        <div *ngIf="item.img_Banner" class="d-flex justify-content-between mb-3 background-z-2 p-4">
+                                            <div>
+                                                <h6>Nueva foto de portada:</h6>
+                                                <img [src]="'../../assets/img/' + item.img_Banner" width="175px"> 
+                                                <h6 class="font-light"><i class="bi bi-calendar3"></i> {{ item.fecha_solicitud | date :'short'}}</h6>
+                                            </div>
+                                            <div class="estado-box">
+                                                <h6>Estado solicitud</h6> <br>
+                                                <h6 class="text-success" *ngIf="item.estado_solicitud == 1">Aprobado</h6> 
+                                                <h6 class="text-danger" *ngIf="item.estado_solicitud == 0">Rechazado</h6> 
+                                                <h6 class="text-primary" *ngIf="item.estado_solicitud == null">Pendiente</h6>
+                                            </div>
+                                         
+                                        </div>
+
+                                        <div *ngIf="item.img_Perfil" class="d-flex justify-content-between mb-3 background-z-2 p-4">
+                                            <div>
+                                                <h6>Nueva foto de perfil:</h6>
+                                                <img [src]="'../../assets/img/' + item.img_Perfil" width="175px"> 
+                                                <h6 class="font-light"><i class="bi bi-calendar3"></i> {{ item.fecha_solicitud | date :'short'}}</h6>
+                                            </div>
+                                            <div class="estado-box">
+                                                <h6>Estado solicitud:</h6> <br>
+                                                <h6 class="text-success" *ngIf="item.estado_solicitud == 1">Aprobado</h6> 
+                                                <h6 class="text-danger" *ngIf="item.estado_solicitud == 0">Rechazado</h6> 
+                                                <h6 class="text-primary" *ngIf="item.estado_solicitud == null">Pendiente</h6>
+                                            </div>
+                                        </div>
+                                        
+
+                                        <div *ngIf="item.nombre" class="d-flex justify-content-between mb-3 background-z-2 p-4">
+                                            <div>
+                                                <h6>Nuevo nombre:</h6>
+                                                <h6 class="">{{ item.nombre }}</h6>
+                                                <h6 class=""><i class="bi bi-calendar3"></i> {{ item.fecha_solicitud | date :'short'}}</h6>
+                                            </div>
+                                            <div class="estado-box">
+                                                <h6>Estado solicitud:</h6> <br>
+                                                <h6 class="text-success" *ngIf="item.estado_solicitud == 1">Aprobado</h6> 
+                                                <h6 class="text-danger" *ngIf="item.estado_solicitud == 0">Rechazado</h6> 
+                                                <h6 class="text-primary" *ngIf="item.estado_solicitud == null">Pendiente</h6> 
+                                            </div>
+                                            <div class="alert alert-danger" role="alert" *ngIf="item.estado_solicitud == 0">
+                                                Detalles del rechazo
+                                                <br>
+                                                Fecha: {{item.fecha_rechazo | date}}
+                                                <br>
+                                                Motivo: {{item.motivo}}
+                                                <br>
+                                                Detalles: {{item.detalles}}
+                                            </div>  
+                                        </div>
+                                        <div *ngIf="item.apellido" class="d-flex justify-content-between mb-3 background-z-2 p-4">
+                                            <div>
+                                                <h6>Nuevo apellido:</h6>
+                                                <h6 class="">{{ item.apellido }}</h6>
+                                                <h6 class=""><i class="bi bi-calendar3"></i> {{ item.fecha_solicitud | date :'short'}}</h6>
+                                            </div>
+                                            <div class="estado-box">
+                                                <h6>Estado solicitud:</h6> <br>
+                                                <h6 class="text-success" *ngIf="item.estado_solicitud == 1">Aprobado</h6> 
+                                                <h6 class="text-danger" *ngIf="item.estado_solicitud == 0">Rechazado</h6> 
+                                                <h6 class="text-primary" *ngIf="item.estado_solicitud == null">Pendiente</h6> 
+                                            </div>
+                                            <div class="alert alert-danger" role="alert" *ngIf="item.estado_solicitud == 0">
+                                                Detalles del rechazo
+                                                <br>
+                                                Fecha: {{item.fecha_rechazo | date}}
+                                                <br>
+                                                Motivo: {{item.motivo}}
+                                                <br>
+                                                Detalles: {{item.detalles}}
+                                            </div>  
+                                        </div>
+                                        
+                                        <div *ngIf="item.descripcion" class="d-flex justify-content-between mb-3 background-z-2 p-4">
+                                            <div class="mr-4">
+                                                <h6>Nueva descripcion: </h6>
+                                                <h6 class="font-light">{{ item.descripcion }}</h6>
+                                                <h6 class="font-light"><i class="bi bi-calendar3"></i> {{ item.fecha_solicitud | date :'short'}}</h6>
+                                            </div>
+                                            <div class="estado-box">
+                                                <h6>Estado solicitud: </h6> 
+                                                <h6 class="text-success" *ngIf="item.estado_solicitud == 1">Aprobado</h6> 
+                                                <h6 class="text-danger" *ngIf="item.estado_solicitud == 0">Rechazado</h6> 
+                                                <h6 class="text-primary" *ngIf="item.estado_solicitud == null">Pendiente</h6>
+                                            </div>
+                                            <div class="alert alert-danger" role="alert" *ngIf="item.estado_solicitud == 0">
+                                                Detalles del rechazo
+                                                <br>
+                                                Fecha: {{item.fecha_rechazo | date}}
+                                                <br>
+                                                Motivo: {{item.motivo}}
+                                                <br>
+                                                Detalles: {{item.detalles}}
+                                            </div>    
+                                        </div>
+                                        
+                                        <div *ngIf="item.profesion" class="d-flex justify-content-between mb-3 background-z-2 p-4">
+                                            <div>
+                                                <h6>Nueva profesion: </h6>
+                                                <h6 class="font-light">{{ item.profesion }}</h6>
+                                                <h6 class="font-light"><i class="bi bi-calendar3"></i> {{ item.fecha_solicitud | date :'short'}}</h6>
+                                            </div>
+                                            <div class="estado-box">
+                                                <h6>Estado solicitud:</h6>
+                                                <h6 class="text-success" *ngIf="item.estado_solicitud == 1">Aprobado</h6> 
+                                                <h6 class="text-danger" *ngIf="item.estado_solicitud == 0">Rechazado </h6> 
+                                                <h6 class="text-primary" *ngIf="item.estado_solicitud == null">Pendiente</h6> 
+                                            </div>
+                                            <div class="alert alert-danger" role="alert" *ngIf="item.estado_solicitud == 0">
+                                                Detalles del rechazo
+                                                <br>
+                                                Fecha: {{item.fecha_rechazo | date}}
+                                                <br>
+                                                Motivo: {{item.motivo}}
+                                                <br>
+                                                Detalles: {{item.detalles}}
+                                            </div>    
+                                        </div>
+                                        
+                                        <div *ngIf="item.facebook">
+                                            <div>
+                                                <h6>Nuevo facebook:</h6>
+                                                <h6 class="font-light">{{ item.facebook }}</h6>
+                                                <h6 class="font-light"><i class="bi bi-calendar3"></i> {{ item.fecha_solicitud | date :'short'}}</h6>
+                                            </div>
+                                            <div class="estado-box">
+                                                <h6>Estado solicitud:</h6>
+                                                <span class="text-success" *ngIf="item.estado_solicitud == 1">Aprobado</span> 
+                                                <span class=".text-danger" *ngIf="item.estado_solicitud == 0">Rechazado</span> 
+                                                <span class=".text-primary" *ngIf="item.estado_solicitud == null">Pendiente</span>
+                                            </div>
+                                            <div class="alert alert-danger" role="alert" *ngIf="item.estado_solicitud == 0">
+                                                Detalles del rechazo
+                                                <br>
+                                                Fecha: {{item.fecha_rechazo | date}}
+                                                <br>
+                                                Motivo: {{item.motivo}}
+                                                <br>
+                                                Detalles: {{item.detalles}}
+                                            </div>  
+                                        </div>
+                                        
+                                        <div *ngIf="item.instagram">
+                                            <div>
+                                                <h6>Nuevo instagram: </h6>
+                                                <h6 class="font-light">{{ item.instagram }}</h6>
+                                                <h6 class="font-light"><i class="bi bi-calendar3"></i> {{ item.fecha_solicitud | date :'short'}}</h6>
+                                            </div>
+                                            <div class="estado-box">
+                                                <h6>Estado solicitud: </h6>
+                                                <span class="text-success" *ngIf="item.estado_solicitud == 1">Aprobado</span> 
+                                                <span class=".text-danger" *ngIf="item.estado_solicitud == 0">Rechazado</span> 
+                                                <span class=".text-primary" *ngIf="item.estado_solicitud == null">Pendiente</span>
+                                            </div> 
+                                            <div class="alert alert-danger" role="alert" *ngIf="item.estado_solicitud == 0">
+                                                Detalles del rechazo
+                                                <br>
+                                                Fecha: {{item.fecha_rechazo | date}}
+                                                <br>
+                                                Motivo: {{item.motivo}}
+                                                <br>
+                                                Detalles: {{item.detalles}}
+                                            </div>  
+                                        </div>
+                                        
+                                        <div *ngIf="item.youtbe">
+                                            <div>
+                                                <h6>Nuevo youtube: </h6>
+                                                <h6 class="font-light">{{ item.youtbe }}</h6>
+                                                <h6 class="font-light"><i class="bi bi-calendar3"></i> {{ item.fecha_solicitud | date :'short'}}</h6>
+                                            </div>
+                                            <div class="estado-box">
+                                                <h6>Estado solicitud:</h6>
+                                                <span class="text-success" *ngIf="item.estado_solicitud == 1">Aprobado</span> 
+                                                <span class=".text-danger" *ngIf="item.estado_solicitud == 0">Rechazado</span> 
+                                                <span class=".text-primary" *ngIf="item.estado_solicitud == null">Pendiente</span>
+                                            </div>
+                                            <div class="alert alert-danger" role="alert" *ngIf="item.estado_solicitud == 0">
+                                                Detalles del rechazo
+                                                <br>
+                                                Fecha: {{item.fecha_rechazo | date}}
+                                                <br>
+                                                Motivo: {{item.motivo}}
+                                                <br>
+                                                Detalles: {{item.detalles}}
+                                            </div>  
+                                        </div>                                       
+                                        
+                                        <div *ngIf="item.email">
+                                            <div>
+                                                <h6>Nuevo email:</h6>
+                                                <h6 class="font-light">{{ item.email }}</h6>
+                                                <h6 class="font-light"><i class="bi bi-calendar3"></i> {{ item.fecha_solicitud | date :'short'}}</h6>
+                                            </div>
+                                            
+                                            <div class="estado-box">
+                                                <h6>Estado solicitud:</h6>
+                                                <span class="text-success" *ngIf="item.estado_solicitud == 1">Aprobado</span> 
+                                                <span class=".text-danger" *ngIf="item.estado_solicitud == 0">Rechazado</span> 
+                                                <span class=".text-primary" *ngIf="item.estado_solicitud == null">Pendiente</span>
+                                            </div>
+                                            <div class="alert alert-danger" role="alert" *ngIf="item.estado_solicitud == 0">
+                                                Detalles del rechazo
+                                                <br>
+                                                Fecha: {{item.fecha_rechazo | date}}
+                                                <br>
+                                                Motivo: {{item.motivo}}
+                                                <br>
+                                                Detalles: {{item.detalles}}
+                                            </div>  
+                                        </div>      
+                                        
+                                        <div *ngIf="item.telefono">
+                                            <div>
+                                                <h6>Nuevo telefono:</h6>
+                                                <h6 class="font-light">{{ item.telefono }}</h6>
+                                                <h6 class="font-light"><i class="bi bi-calendar3"></i> {{ item.fecha_solicitud | date :'short'}}</h6>
+                                            </div>
+                                            <div class="estado-box">
+                                                <h6>Estado solicitud:</h6>
+                                                <span class="text-success" *ngIf="item.estado_solicitud == 1">Aprobado</span> 
+                                                <span class=".text-danger" *ngIf="item.estado_solicitud == 0">Rechazado</span> 
+                                                <span class=".text-primary" *ngIf="item.estado_solicitud == null">Pendiente</span>
+                                            </div>
+                                            <div class="alert alert-danger" role="alert" *ngIf="item.estado_solicitud == 0">
+                                                Detalles del rechazo
+                                                <br>
+                                                Fecha: {{item.fecha_rechazo | date}}
+                                                <br>
+                                                Motivo: {{item.motivo}}
+                                                <br>
+                                                Detalles: {{item.detalles}}
+                                            </div>  
+                                        </div>                        
+                                    </div>                                    
+                                </div>                                  
+                            </div>        
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+<!-- MODAL -->
+<div [style.display]="showModal ? 'block' : 'none'" class="modal" id="imagemodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog post-modal">
+      <div class="modal-content p-2">
+        <div class="modal-header">
+          <h4 class="modal-title" id="myModalLabel">Normativas del Directorio Creativo</h4>
+        </div>
+        <div class="modal-body">       
+            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ad ea optio reprehenderit alias id placeat velit quod consequatur perferendis sit, quibusdam odio, unde ipsa voluptate nam sunt voluptatum soluta ducimus.</p>
+            <hr>
+            Posibles motivos por lo cual se puede rechazar su solicitud:
+            <li>
+                Contenido sexual.
+            </li>
+            <li>
+                Bullyng.
+            </li>
+            <li>
+                Drogas.
+            </li>
+            <div class="form-group mt-3 d-flex justify-content-between">
+                <button type="button" class="btn btn-danger" data-dismiss="modal" (click)="esconderModal()">Cerrar</button>               
+            </div>
+        </div>
+      </div>
+    </div>
+</div>

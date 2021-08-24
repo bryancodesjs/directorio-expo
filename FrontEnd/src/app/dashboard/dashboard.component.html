@@ -1,0 +1,143 @@
+<div class="container view-padding background pt-5">
+    <!-- breadcrumb --
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a routerLink="/">Inicio</a></li>
+          <li class="breadcrumb-item active" aria-current="page">Mi perfil</li>
+        </ol>
+    </nav> -->
+
+    <div class="d-flex profile-wrap mt-3">
+        <div class="col-lg-2  user-field background"> 
+            <div class="user-field-inner border round background-primary overflow-hidden">
+                <!-- <div class="mini-banner-wrapper w-100"> -->
+                    <img class="mini-banner-wrapper w-100" [src]=" infoUser?.imgBanner ? '/assets/img/' + infoUser?.imgBanner : '/assets/default-banner.png' ">
+                <!-- </div> -->
+                <div class="user-data d-flex flex-column text-center align-items-center p-3">
+                    
+                    <div class="user-profile-img-wrapper border rounded-circle d-flex justify-content-center align-items-center overflow-hidden bg-light">
+                        <img [src]=" infoUser?.img_perfil ? '/assets/img/' + infoUser?.img_perfil : '/assets/default-perfil.png' ">
+                    </div>
+                    <!--<h5>{{ infoUser?.artista }} <a routerLink="/configuracion" class="bi bi-three-dots-vertical dashboard-config-icon"></a></h5> -->
+                    <h5>{{ infoUser?.profesion }}</h5>
+                    <!--<button class="btn btn-primary">Contacta a Dennice</button>-->
+                    <div class="socialmedia-wrap d-flex pt-2 pb-3">
+                        <a *ngIf="infoUser?.instagram == null" routerLink="#"><i class="bi bi-instagram"></i></a>
+                        <a *ngIf="infoUser?.instagram == null" routerLink="#"><i class="bi bi-facebook"></i></a>
+                        <a *ngIf="infoUser?.instagram == null" routerLink="#"><i class="bi bi-youtube"></i></a>
+                    </div>
+                </div>
+                
+                <!---
+                <div class="d-flex justify-content-center mt-2 mb-4" *ngIf="infoUser?.habilitado == true && infoUser?.bloqueado == false">
+                    <button class="btn btn-primary post-btn" (click)="show()"><i class="bi bi-cloud-arrow-up pr"></i> Nueva Publicacion</button>
+                </div> -->
+            
+                <div class="about w-100 pt-3 pb-3 p-3">
+                    <label class="non-input-label">Acerca de mi</label>
+                    <p class="text-wraps" id="descripcionArtista">{{ infoUser?.descripcionGeneral }}</p>
+                    <p *ngIf="!infoUser?.descripcionGeneral" class="text-wraps">Aun no has puesto una descripcion.</p>
+                    <label for="" class="non-input-label">Telefono</label>
+                    <p class="text-wraps">{{ infoUser?.telefono }}</p>
+                    <p class="">Miembro desde <span>{{ infoUser?.fechaIngreso | date }}</span></p>
+                </div>
+            </div>
+        </div>
+        <div class="d-flex flex-column w-100"> <!--col-lg-10-->
+            <!-- <div class="d-flex statistics-wrap pl3">
+                <div class="d-flex justify-content-between background-primary statistics border round p-3 flex-wrap row">
+                    <div class="col-md-4 text-center">
+                        <h1>{{ obras?.length }}</h1>
+                        <h5><i class="bi bi-cloud-arrow-up pr"></i> Publicaciones</h5>
+                    </div>
+                    <div class="col-md-4 text-center">
+                        <h1>{{ visitas }}</h1>
+                        <h5><i class="bi bi-eye"></i> Visitas</h5>
+                    </div>
+                    <div class="col-md-4 text-center">
+                        <h1>{{ valoraciones }}</h1>
+                        <h5><i class="bi bi-heart"></i> Valoraciones</h5>
+                    </div>
+                </div>
+            </div> -->
+
+            <!-- <div class="d-flex justify-content-end mt-3 mb-2 pl3">
+                <button class="btn btn-primary post-btn" (click)="show()" *ngIf="infoUser.habilitado"><i class="bi bi-cloud-arrow-up pr"></i> Nueva Publicacion</button>
+            </div> -->
+            
+            <div class="grid pl3" > <!-- thumbnails-wrap -->
+
+                <div [ngClass]="infoUser?.habilitado == false && perfilCargado ? 'alert alert-danger' : 'd-none'">
+                    <h5>Tu perfil ha sido rechazado.</h5>                    
+                    <p>Motivo: {{motivoRechazo?.nombre}}</p>
+                    <p *ngIf="motivoRechazo?.detalle">Más detalles: {{motivoRechazo.detalle}}</p>
+                    <p>Fecha: {{motivoRechazo?.fecha | date}}</p>
+                </div>
+
+                <div [ngClass]="infoUser?.habilitado == null && perfilCargado ? 'alert alert-danger' : 'd-none'">
+                    <h5>Tu perfil esta en proceso de revision. {{infoUser.habilitado}}</h5>
+                </div>
+
+                <div [ngClass]="infoUser?.bloqueado == true ? 'alert alert-danger' : 'd-none'">
+                    <h5>Tu perfil esta temporalmente deshabilitado.</h5>
+                </div>
+               
+                    <!-- BUCLE FOR PARA IMPRIMIR TODAS LAS OBRAS REALIZADAS POR ESTE ARTISTA -->
+
+                    <!-- Estado de aprobacion-->
+                    <div *ngFor="let items of obras" [ngClass]=" items.estadoObra == false ? 'rejected' : items.estadoObra == null ? 'pending' : '' ">
+
+                        <!-- Estado de solicitud pendiente-->
+                        <div class="status d-flex justify-content-center align-items-center position-absolute"  *ngIf="items.estadoObra == null">
+                            
+                            <div class="p-4 status-wrap">
+                                <div class="mb-3">
+                                    <h4 class=""><img id="statusSpinner" class="rotate" src="../../assets/img/spinner.svg" width="15px" height="15px"> En proceso</h4>
+                                </div>
+                                <div class="contenedor-razon-rechazo">
+                                    <div class="detalles">
+                                        <p class="font-light mb-3">Su solicitud esta siendo revisada por el personal de soporte.</p>
+                                        <p class="font-light">Tiempo estimado:</p>
+                                        <h6 class="font-light"><i class="bi bi-alarm"></i> 3 horas</h6>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Estado de solicitud rechazado-->
+                        <div class="status d-flex  justify-content-center align-items-start position-absolute flex-column" *ngIf="items.estadoObra == false">
+                            <div class="p-4 status-wrap">
+                                <div class="mb-3">
+                                    <h4 class="">Lo sentimos, su publicacion <br> ha sido rechazada</h4>
+                                </div>
+                                <h4 class="" >{{items?.motivo}} <i class="bi bi-slash-circle"></i></h4>
+                                <div class="contenedor-razon-rechazo">
+                                    <div class="detalles">
+                                        <p class="font-light">{{items?.detalles}}</p>
+                                        <h6 class="font-light"><i class="bi bi-calendar3"></i> {{items?.fecha_rechazo|date}}</h6>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="home-img-wrapper overflow-hidden d-flex justify-content-center align-items-center">
+                            <!-- thumbnail -->
+                            <img [src]=" items?.imgObra != null ? '../../../assets/img/' + items?.imgObra : '../../../assets/no-image-home.png' " (error)="imagenError($event)">
+                        </div>
+                        <div class="info-wrap p-2 d-flex justify-content-between">
+                            <div>
+                                <h6 class="no-margin">{{ items.nombreObra }}</h6>                               
+                            </div>
+                            <div class="d-flex justify-content-end" style="min-width: 110px !important;">
+                                <p class="mr10 ml10"><i class="bi bi-heart-fill"></i> <span> {{ items.valoraciones }}</span></p>
+                                <p><i class="bi bi-eye-fill"></i> <span>{{ items.visitas }}</span></p>
+                            </div>
+                        </div>
+                    </div>  
+                
+            </div>
+        </div>
+    </div>
+</div>
+
+

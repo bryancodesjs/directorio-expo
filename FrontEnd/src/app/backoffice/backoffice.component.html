@@ -1,0 +1,21 @@
+<div class="custom-margin-top-2">
+    <app-backoffice-nav (mensajes)="Mensajes()"></app-backoffice-nav>
+</div>
+<section class="container pt-5" *ngIf="!_mensajes">
+    <h2>Panel Administrativo</h2>
+    <div class="d-flex">
+        <button [class]="_publicaciones ? 'backoffice-section-btn press' : 'backoffice-section-btn' " (click)="publicaciones()"><i class="bi bi-image"></i> Publicaciones<br><span class="amount">{{ obrasPendientes.length }}</span></button>
+        <button [class]="_registros ? 'backoffice-section-btn press' : 'backoffice-section-btn' " (click)="registros()"><i class="bi bi-person-plus-fill"></i> Nuevos Registros<br><span class="amount">{{ artistasPendientes.length }}</span></button>
+        <button [class]="_registros ? 'backoffice-section-btn press' : 'backoffice-section-btn' " (click)="tickets()"><i class="bi bi-file-earmark-text"></i> Tickets<br><span class="amount">{{ ticketPendientes.length }}</span></button>
+        <button class="backoffice-section-btn" ><i class="bi bi-file-earmark-text"></i> Denuncias<br><span class="amount">8,145</span></button>
+    </div>
+    <hr class="mt-3">
+</section>
+
+<app-publicaciones (Actualizar)="actualizar()" *ngIf="_publicaciones" [obrasPendientes]=obrasPendientes ></app-publicaciones>
+
+<app-artistas (Actualizar)="actualizar()" *ngIf="_registros" [_artistasPendientes]=artistasPendientes ></app-artistas>
+
+<app-tickets (Actualizar)="actualizar()" *ngIf="_tickets" [ticketPendientes]=ticketPendientes></app-tickets>
+
+<app-mensajeria [backOffice]="true" *ngIf="_mensajes"></app-mensajeria>

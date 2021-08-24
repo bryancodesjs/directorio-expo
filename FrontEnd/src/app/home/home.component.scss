@@ -1,0 +1,25 @@
+div.disabled
+{
+  pointer-events: none;  
+  opacity: 0.5;
+  background: #0fc746;
+}
+/*.home-info-artist-icon {
+  width: 15px;
+  height: 15px;
+  border: 2px solid #0460b3;
+  border-radius: 100%;
+  margin-right: 5px;
+}*/
+.username {
+  font-weight: 700 !important;
+}
+.grid {
+  margin-top: 146px !important;
+}
+.landing-img {
+  height: 200px;
+}
+.landing-container {
+  margin-top: 60px;
+}

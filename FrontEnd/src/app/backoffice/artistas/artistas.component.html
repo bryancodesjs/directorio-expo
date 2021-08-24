@@ -1,0 +1,62 @@
+<section class="container" *ngFor="let items of _artistasPendientes">
+    <div class="results-wrap">
+        <div class="result bg border round p-3 d-flex mt-3">
+            <!-- <div class="img-wrapper round overflow-hidden d-flex justify-content-center align-items-center">
+                <img [src]="'../../assets/img/' + items.imgObra" (error)="imagenError($event)" > 
+            </div> -->
+            <div class="about-wrap d-flex flex-column justify-content-between">
+                <div class="about-text">
+                    <!-- <h4>{{ items.artista }}</h4> -->
+                    <!-- <p>{{ items.descripcionObra }}</p> -->
+                </div>
+
+                <div class="about-author d-flex">
+                    <div class="author-img-wrap rounded-circle overflow-hidden d-flex justify-content-center align-items-center">
+                        <img [src]=" items?.img_perfil != null ? '../../assets/img/' + items?.img_perfil : '../../assets/default-perfil.png' " (error)="imagenError($event)" >
+                    </div>
+                    <div class="author-info">
+                        <h5>{{ items.artista }}</h5>
+                        <h6 class="font-light mt-3"><i class="bi bi-envelope"></i> email@gmail.com</h6>
+                        <h6 class="font-light"><i class="bi bi-telephone-fill"></i> (809)220-1111</h6>
+                        <h6 class="font-light"><i class="bi bi-geo-alt-fill"></i> Santiago</h6>
+                        <small><a [routerLink]=" '/perfil/' + items.id">Revisar perfil <i class="bi bi-box-arrow-up-right"></i></a></small>
+                    </div>
+                </div>
+            </div>
+            <div class="actions-wrap d-flex justify-content-center align-items-center" [id]=" 'data-' + items.id">
+                <button class="btn btn-primary" type="button" (click)="aprobarArtista(items.id)"><i class="bi bi-check"></i> Aprobar</button>
+                <button class="btn delete-btn" (click)="rechazarMenu(items.id)"><i class="bi bi-x-circle"></i> Rechazar</button>
+            </div>        
+            
+            <!-- rechazar artistas -->
+            <div class="actions-wrap d-flex justify-content-center align-items-center d-none" [id]=" 'rechazar-' + items.id">
+                <form [formGroup]="rechazarForm">
+                    <div class="parte-1">
+                      <h5 class="text-center text-dark p-3">Rechazar Registro</h5>
+                      <select class="form-control" formControlName="Id_Violacion">
+                        <option value="" disabled>Seleccione</option>
+                        <option *ngFor="let violacion of violaciones" [ngValue]="violacion.id">{{violacion.nombre}}</option>        
+                      </select>   
+                      <div *ngIf="submitted && f.Id_Violacion.errors">
+                        <p class="form-text text-danger" *ngIf="f.Id_Violacion.errors.required" >Debe seleccionar un motivo.</p>
+                      </div>                  
+                      <div class="form-group mt-2">
+                        <label for="exampleFormControlTextarea1">Agregar mas detalles</label>
+                        <textarea class="form-control" rows="3" formControlName="Detalle"></textarea>
+                      </div>
+                      <div class="d-flex justify-content-center">
+                        <button class="btn btn-primary m-3" type="button" (click)="cancelarRechazo(items.id)">Cancelar</button>
+                        <button class="btn btn-danger m-3" type="button" (click)="rechazarArtista(items.id)">Rechazar</button>
+                      </div>
+                    </div>
+          
+                </form>
+            </div>
+        </div>
+    </div>
+</section> 
+<section *ngIf="_artistasPendientes.length == 0" class="container">
+    <div class="results-wrap p-3">
+        <h5>No existen registros pendientes</h5>
+    </div>
+</section>

@@ -1,0 +1,55 @@
+
+<div class="search-area search--area--padding d-flex w-100">
+  <div class="search--bar d-flex w-100 justify-content-between">
+    <!--filtro de categorias-->
+    <div class="filter">
+      <div class="dropdown">
+        <button class="btn dropdown-toggle search--btn--left n-focus" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+          <span class="button--text mr">Categorias</span> <i class="bi bi-filter-left"></i>
+        </button>
+        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+
+          <!-- bucle categorias inicio-->
+          <div class="categoria">
+            <li><a class="dropdown-item categoria--titulo" href="#">Arquitectónico</a></li>
+            <!--bucle subcategoria inicio-->
+            <div class="subcategorias d-none">
+              <li class="subcategory"><a class="dropdown-item" href="#">Arquitectura Efímera (Stand, escenografía)</a></li>
+              <li class="subcategory"><a class="dropdown-item" href="#">Interiorista</a></li>
+              <li class="subcategory"><a class="dropdown-item" href="#">Paisajismo</a></li>
+            </div>
+            <!--bucle subcategoria final-->
+          </div>
+          <!-- bucle categorias final-->
+
+          <!-- bucle categorias inicio-->
+          <div class="categoria">
+            <li><a class="dropdown-item categoria--titulo" href="#">Moda</a></li>
+            <!--bucle subcategoria inicio-->
+            <div class="subcategorias d-none">
+              <li class="subcategory"><a class="dropdown-item" href="#">Estilismo</a></li>
+              <li class="subcategory"><a class="dropdown-item" href="#">Vestuario de Espectáculo</a></li>
+              <li class="subcategory"><a class="dropdown-item" href="#">Textil</a></li>
+            </div>
+            <!--bucle subcategoria final-->
+          </div>
+          <!-- bucle categorias final-->
+
+          <li><a class="dropdown-item" href="#">Something else here</a></li>
+        </ul>
+      </div>
+    </div>
+    <!--barra de busqueda-->
+    <div class="search--wrapper flex-auto">
+      <input class="form-control" type="text">
+    </div>
+    <!--boton de busqueda-->
+    <button class="btn accent search--btn--right n-focus">
+      <span class="button--text mr">Buscar</span> <i class="bi bi-search"></i></button>
+  </div>
+  
+  <div class="filters d-flex"></div>
+</div>
+
+ 
+

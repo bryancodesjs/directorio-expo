@@ -1,0 +1,18 @@
+<table id="administrativos">
+    <thead>
+      <tr class="font-light">
+        <th scope="col">ID</th>
+        <th scope="col">Nombre</th>
+        <th scope="col">Fecha Registro</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody *ngFor="let admin of administradores; index as i">
+      <tr>
+        <th scope="row">{{i+1}}</th>
+        <td>{{admin.artista}}</td>
+        <td>{{admin.ingreso | date}}</td>
+        <td><button [id]=" 'data-' + admin.id" type="button" (click)="Privilegios( admin.id, admin.artista)" class="btn btn-primary">Privilegios</button></td>
+      </tr>    
+    </tbody>
+</table>

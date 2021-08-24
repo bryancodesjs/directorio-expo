@@ -1,0 +1,232 @@
+
+
+<div class="container-fluid pt-5 mt-5 text-center"> <!--
+  <h2 class="mt-5 animate__animated animate__fadeInUp">Galeria de profesionales</h2>
+  <h3 class="text-lighter mb-5 animate__animated animate__fadeInUp delay-1">¡Encuentra profesionales del arte cerca de ti!</h3> -->
+</div> 
+<!--<div class="container-fluid d-flex justify-content-end filters">
+  <select #_select (change)=" Ordenar(_select.value) " >
+    <option value="" disabled>Ordenar por</option>
+    <option value="1"> Mas recientes</option>
+    <option value="2"> Mas visitados</option>
+    <option value="3"> Mas valorados</option>
+  </select>
+</div> -->
+
+<!-- RESULTADOS DE BUSQUEDA -->
+<div class="container grid mb-5 animate__animated animate__fadeIn delay-1" *ngIf="galeria"> 
+   <!-- BUCLE FOR PARA IMPRIMIR TODAS LAS OBRAS REALIZADAS POR TODOS LOS ARTISTAS -->
+  <div class="" *ngFor="let gallery of galeria" > 
+    <div class="home-img-wrapper overflow-hidden d-flex justify-content-center align-items-center" (click)="show(gallery)">
+      <img [src]="gallery?.imgObra != null ? '/assets/img/' + gallery?.imgObra : '../../assets/default-img.png' " (error)="imagenError($event)">
+    </div>
+    
+    <div class="info-wrap p-2 d-flex justify-content-between">
+      <div class="d-flex flex-column">
+        <h6 class="no-margin">{{ gallery.nombreObra }}</h6>
+        <div class="d-flex align-items-center">
+          <!-- <div class="home-info-artist-icon"></div> -->
+          <a class="no-margin text-dark" [routerLink]="['perfil/', gallery.id]">
+            <!-- si es un profesional se pone este icono junto al nombre <i class="bi bi-person-lines-fill"></i> -->
+            <!-- si es una empresa se pone este icono junto al nombre <i class="bi bi-building"></i> -->
+            <i class="bi bi-person-lines-fill mr"></i>
+            <span class="username">{{ gallery.artista }}</span>
+          </a>
+        </div>
+      </div>
+      <div class="d-flex justify-content-end" style="min-width: 110px !important;">
+        <p class="mr10 ml10"><i class="bi bi-heart-fill"></i> <span> {{ gallery.valoraciones }}</span></p>
+        <p><i class="bi bi-eye-fill"></i> <span> {{ gallery.visitas }}</span></p>
+      </div>
+    </div>    
+  </div>
+</div>
+
+<!-- landing de bienvenida -->
+<div class="container d-none landing-container d-flex align-items-center justify-content-center">
+  <div class="landing-content w-100">
+    <div class="row w-100 d-flex animate__animated animate__fadeIn justify-content-center p-5">
+      <h2 class="text-center ">Encuentra profesionales cerca de ti</h2>
+      <h4 class="text-muted text-center">Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo laboriosam aliquam asperiores praesentium laborum distinctio deserunt.</h4>
+    </div>
+    <div class="row w-100 mb-3 d-flex justify-content-between">
+      <div class="col-lg-3 d-flex justify-content-start flex-column align-items-center mb-5 animate__animated animate__slideInUp">
+        <img class="landing-img mb-3" src="../../assets/landing/1.svg" alt="">
+        <h3>Lorem ipsum dolor sit amet.</h3>
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repellendus, ab. 
+        </p>
+      </div>
+      <div class="col-lg-3 d-flex justify-content-center flex-column align-items-center mb-5 animate__animated animate__slideInUp delay-1">
+        <img class="landing-img mb-3" src="../../assets/landing/2.svg" alt="">
+        <h3>Lorem ipsum dolor sit amet.</h3>
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fuga optio corrupti accusantium sed laborum suscipit.
+        </p>
+      </div>
+      <div class="col-lg-3 d-flex justify-content-center flex-column align-items-center mb-5 animate__animated animate__slideInUp delay-2">
+        <img class="landing-img mb-3" src="../../assets/landing/3.svg" alt="">
+        <h3>Lorem ipsum dolor sit amet.</h3>
+        <p>
+          Lorem ipsum dolor sit amet consectetur, adipisicing elit. Doloribus at debitis eveniet laboriosam, alias nostrum inventore hic! 
+        </p>
+      </div>
+      
+    </div>
+
+  </div>
+</div>
+<div class="d-flex justify-content-center" *ngIf="error">
+  <h4>Ha ocurrido un error, por favor intentelo mas tarde...</h4>
+</div>
+
+<!-- modal de mensajeria -->
+<div *ngIf="_contactarModal" class="modal-mensajeria">
+  <div class="backdrop h-100">
+    <div class="wrapper d-flex justify-content-center align-items-center h-100">
+      <div class="mensajeria-box background-z-2 round p-3">
+        <form [formGroup]="mensajeForm">
+          <h5>Contactar a <span>{{_datosContactoModal.artista}}</span></h5>
+          <hr>
+          <div class="form-group">
+            <label for="">Asunto</label>
+            <input formControlName="asunto" type="text" class="form-control" id="" placeholder="Escribir asunto...">
+          </div>
+          <div *ngIf="_submitMensaje && m.asunto.errors">
+            <p class="form-text text-danger" *ngIf="m.asunto.errors.required" >Asunto es requerido.</p>
+          </div>
+
+          <div class="form-group">
+            <label >Tipo de solicitud</label>
+            <select class="form-control" formControlName="tipo_solicitud">
+              <option value="" disabled selected>Seleccione</option>
+              <option *ngFor="let tipo of TiposSolicitud" [value]="tipo.id" >{{ tipo.nombre }}</option>
+            </select>
+            <div *ngIf="_submitMensaje && m.tipo_solicitud.errors">
+              <p class="form-text text-danger" *ngIf="m.tipo_solicitud.errors.required" >Tipo de solicitud es requerida.</p>
+            </div>
+          </div>
+          
+          <div class="form-group">
+            <label for="exampleFormControlTextarea1">Agregar detalles</label>
+            <textarea class="form-control font-light" id="exampleFormControlTextarea1" rows="3" formControlName="detalles"></textarea>
+          </div>
+          <div *ngIf="_submitMensaje && m.detalles.errors">
+            <p class="form-text text-danger" *ngIf="m.detalles.errors.required" >Detalles es requerido.</p>
+          </div>
+
+          <div class="d-flex justify-content-between mt-4">
+            <button type="button" (click)="EsconderModalMensajes()" class="btn btn-light">Cancelar</button>
+            <button type="button" class="btn btn-primary" (click)="EnviarMensaje()" >Enviar </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL -->
+<div [style.display]="showModal ? 'block' : 'none'" class="modal" id="imagemodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  
+  <div class="modal-dialog p-1">
+    <div class="d-flex about-artist justify-content-between">
+      <div class="info">
+        <h5>{{ obraModal.nombreObra }}</h5>
+        <div class="d-flex artist-and-date flex-wrap">
+          <a class="artist-link" [routerLink]="['perfil/', obraModal.id_perfil]">{{ obraModal.artista }}</a>
+          <p>- {{ obraModal.fechaRegistro | date: 'fullDate' }}</p>
+        </div>
+      </div>
+      <button class="btn modal-close-btn" (click)="ocultarModal()"><i class="bi bi-x-circle"></i></button>
+    </div>
+    <div class="modal-content rounded">
+   
+      <div class="modal-body">
+        <div id="carouselExampleFade" class="carousel slide" data-bs-ride="carousel"> <!-- carousel-fade -->
+          <div class="carousel-inner" *ngIf="obraModal?.imgObra">
+            <div class="carousel-item active">
+              <img [src]="'/assets/img/' + obraModal.imgObra" (error)="imagenError($event)" class="d-block w-100" alt="...">
+            </div>          
+          </div>
+          <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+          </button>
+          <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+          </button>
+        </div>
+
+      </div>
+     
+      <div class="modal-footer d-flex justify-content-center" *ngIf="obraModal.autenticado && !denunciaExistente && !denunciaEnviada"> 
+        <!--boton de valoracion-->
+        <div class="valoracion-wrap rounded-circle overflow-hidden">
+          <div class="valoracion-icon-wrap" (click)="valorar(obraModal.id)" [ngClass]=" obraModal.valorado ? 'disabled' : '' ">
+            <img src="../../assets/valorar.svg" alt="">
+          </div>
+        </div>
+        <p *ngIf="valoracionEnviada" class="text-success">Valoracion enviada.</p> 
+        <p *ngIf="valoracionCorrecta" class="text-success">Ya has valorado esta obra anteriormente.</p> 
+        <p *ngIf="iniciarSesion" class="text-danger">Debes iniciar sesion para poder valorar...</p>        
+      </div>
+
+      <div class="modal-footer d-flex flex-column">
+        <div class="d-flex justify-content-center align-items-center h-100" style="min-width: 110px !important;">
+          <p class="mr10 ml10"><i class="bi bi-heart"></i> <span> {{ obraModal.valoraciones }}</span></p>
+          <p><i class="bi bi-eye"></i> <span> {{ obraModal.visitas }}</span></p> 
+        </div>
+        <button type="button" class="btn btn-primary" (click)="Contactar(obraModal)"><i class="bi bi-chat-left-dots mr10"></i> Contactar a <span>{{ obraModal.artista }}</span></button>
+        <button *ngIf="obraModal.autenticado && !denunciar && !denunciaExistente && !denunciaEnviada" class="btn btn-outline-red" (click)="Denunciar()">Denunciar</button>
+      </div>
+
+      <!-- DENUNCIAS -->
+      <div class="modal-footer d-flex flex-column" >
+
+        <!-- MENSAJE DE QUE EL USUARIO YA HA DENUNCIADO ESTA OBRA  -->
+        <div *ngIf="denunciaExistente">
+          <h4 class="text-success">Ya has denunciado esta obra anteriormente.</h4>
+        </div>
+
+        <!-- MENSAJE DE DENUNCIA ENVIADA CORRECTAMENTE  -->
+        <div *ngIf="denunciaEnviada">
+          <h4 class="text-success">Tu denuncia fue enviada correctamente.</h4>
+        </div>
+
+        <form [formGroup]="denunciasForm" *ngIf="denunciar">
+          <div class="parte-1">
+            <h5 class="text-center text-dark p-3">DENUNCIAR OBRA</h5>
+            <select name="" id="" class="form-control" formControlName="Id_Violacion">
+              <option value="" disabled>Seleccione</option>
+              <option *ngFor="let violacion of violaciones" [ngValue]="violacion.id">{{violacion.nombre}}</option>        
+            </select>
+            <div *ngIf="submitted && f.Id_Violacion.errors">
+              <p class="form-text text-danger" *ngIf="f.Id_Violacion.errors.required" >Debe seleccionar un motivo.</p>
+            </div>
+            
+            <div class="d-flex justify-content-center" *ngIf="!masdetalles">
+              <button class="btn btn-outline-warning m-3" type="button" (click)="cancelarDenuncia()">Cancelar</button>
+              <button class="btn btn-primary m-3" type="button" (click)="masDetalles()">Mas detalles</button>
+              <button class="btn btn-danger m-3" type="button" (click)="denunciarObra( obraModal.id )">Denunciar</button>
+            </div>             
+          </div>
+          
+          <div class="parte-2" *ngIf="masdetalles">
+            <h5 class="text-center text-dark p-3">MAS DETALLES</h5>
+            <div class="form-group">
+              <label for="exampleFormControlTextarea1">Agregar mas detalles</label>
+              <textarea class="form-control" rows="3" formControlName="Detalle"></textarea>
+            </div>
+            <div class="d-flex justify-content-center">
+              <button class="btn btn-outline-warning m-3" type="button" (click)="cancelarDenuncia()">Cancelar</button>
+              <button class="btn btn-danger m-3" type="button" (click)="denunciarObra( obraModal.id )">Denunciar</button>
+            </div>
+          </div>
+        </form>
+      </div>
+
+    </div>
+  </div>
+</div>
+
