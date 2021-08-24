@@ -7,8 +7,8 @@
         </ol>
     </nav> -->
 
-    <div class="d-flex profile-wrap mt-3">
-        <div class="col-lg-2  user-field background"> 
+    <div class="d-flex profile-wrap mt-3 ">
+        <div class="col-lg-2  user-field background animate__animated animate__slideInUp delay-1"> 
             <div class="user-field-inner border round background-primary overflow-hidden">
                 <!-- <div class="mini-banner-wrapper w-100"> -->
                     <img class="mini-banner-wrapper w-100" [src]=" infoUser?.imgBanner ? '/assets/img/' + infoUser?.imgBanner : '/assets/default-banner.png' ">
@@ -18,7 +18,7 @@
                     <div class="user-profile-img-wrapper border rounded-circle d-flex justify-content-center align-items-center overflow-hidden bg-light">
                         <img [src]=" infoUser?.img_perfil ? '/assets/img/' + infoUser?.img_perfil : '/assets/default-perfil.png' ">
                     </div>
-                    <!--<h5>{{ infoUser?.artista }} <a routerLink="/configuracion" class="bi bi-three-dots-vertical dashboard-config-icon"></a></h5> -->
+                    <h5>{{ infoUser?.artista }}</h5>
                     <h5>{{ infoUser?.profesion }}</h5>
                     <!--<button class="btn btn-primary">Contacta a Dennice</button>-->
                     <div class="socialmedia-wrap d-flex pt-2 pb-3">
@@ -34,11 +34,28 @@
                 </div> -->
             
                 <div class="about w-100 pt-3 pb-3 p-3">
-                    <label class="non-input-label">Acerca de mi</label>
-                    <p class="text-wraps" id="descripcionArtista">{{ infoUser?.descripcionGeneral }}</p>
-                    <p *ngIf="!infoUser?.descripcionGeneral" class="text-wraps">Aun no has puesto una descripcion.</p>
-                    <label for="" class="non-input-label">Telefono</label>
-                    <p class="text-wraps">{{ infoUser?.telefono }}</p>
+                    <div class="profile--info--group mb-3">
+                        <h6>Acerca de mi</h6>
+                        <p class="text-wraps" id="descripcionArtista">{{ infoUser?.descripcionGeneral }}</p>
+                        <p *ngIf="!infoUser?.descripcionGeneral" class="text-wraps">Aun no has puesto una descripcion.</p>
+                        <p class="text-wraps"><i class="bi bi-geo-alt-fill"></i> Santo Domingo</p>
+                    </div>
+                    <div class="profile--info--group mb-3">
+                        <h6 >Telefono</h6>
+                        <p class="text-wraps">(809)220-1111</p>
+                    </div>
+                    <!-- <div class="profile--info--group mb-3">
+                        <h6 >Telefono</h6>
+                        <p class="text-wraps">{{ infoUser?.telefono }}</p>
+                    </div> -->
+                    <div class="profile--info--group mb-3">
+                        <h6>Mis Servicios</h6>
+                        <div class="mis--servicios--wrap d-flex flex-wrap">
+                            <span class="badge ">Fotografo</span>
+                            <span class="badge ">Diseñador Grafico</span>
+                            <span class="badge ">Musico</span>
+                        </div>
+                    </div>
                     <p class="">Miembro desde <span>{{ infoUser?.fechaIngreso | date }}</span></p>
                 </div>
             </div>
@@ -65,7 +82,7 @@
                 <button class="btn btn-primary post-btn" (click)="show()" *ngIf="infoUser.habilitado"><i class="bi bi-cloud-arrow-up pr"></i> Nueva Publicacion</button>
             </div> -->
             
-            <div class="grid pl3" > <!-- thumbnails-wrap -->
+            <div class="grid pl3 animate__animated animate__slideInUp delay-2" > <!-- thumbnails-wrap -->
 
                 <div [ngClass]="infoUser?.habilitado == false && perfilCargado ? 'alert alert-danger' : 'd-none'">
                     <h5>Tu perfil ha sido rechazado.</h5>                    

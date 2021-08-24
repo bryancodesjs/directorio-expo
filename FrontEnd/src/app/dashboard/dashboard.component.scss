@@ -17,7 +17,7 @@
         height: 90px;
         background-size: cover;
         img {
-            width: 100%;
+            width: 150%;
             filter: brightness(0.9) !important;
         }
     }
@@ -44,4 +44,9 @@
 }
 .dashboard-config-icon {
     cursor: pointer;
+}
+.mis--servicios--wrap span.badge {
+    background-color: #4d91ce!important;
+    margin-right: 2px;
+    margin-bottom: 2px;
 }
